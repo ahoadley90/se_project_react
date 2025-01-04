@@ -10,8 +10,7 @@ function Header({ onAddClothes }) {
   return (
     <header className="header">
       <div className="header__logo">
-        {/* Add your logo here */}
-        <img src="/path-to-your-logo.svg" alt="WTWR Logo" />
+        <img src="./src/assets/Logo.svg" alt="WTWR Logo" />
       </div>
       <div className="header__info">
         <p className="header__date">{currentDate}</p>
