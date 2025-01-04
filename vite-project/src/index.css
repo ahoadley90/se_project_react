@@ -1,0 +1,13 @@
+@import url("../vendor/normalize.css");
+@import url("../vendor/fonts.css");
+
+:root {
+  font-family: "Cabinet Grotesk", Inter, system-ui, Avenir, Helvetica, Arial,
+    sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* ... rest of your existing styles ... */
+}
+
+/* ... rest of your existing styles ... */
