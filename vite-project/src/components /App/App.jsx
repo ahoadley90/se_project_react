@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
+import Footer from "../Footer/Footer";
 import "./App.css";
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <button onClick={() => setIsAddClothesModalOpen(false)}>Close</button>
         </div>
       )}
+      <Footer />
     </div>
   );
 }
