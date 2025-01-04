@@ -23,7 +23,7 @@ function Header({ onAddClothes }) {
         <p className="header__username">John Doe</p> {/* Hardcoded for now */}
         <img
           className="header__avatar"
-          src="/path-to-avatar.jpg"
+          src="./src/assets/Avatar (2).png"
           alt="User Avatar"
         />
       </div>
