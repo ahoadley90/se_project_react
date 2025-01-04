@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.header__logo img {
+  height: 40px;
+}
+
+.header__info {
+  text-align: center;
+}
+
+.header__add-clothes-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.header__user {
+  display: flex;
+  align-items: center;
+}
+
+.header__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
