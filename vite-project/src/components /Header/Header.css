@@ -5,6 +5,15 @@
   padding: 20px;
 }
 
+.header__info {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  width: 160px;
+  height: 24px;
+}
+
 .header__logo img {
   height: 40px;
 }
@@ -25,6 +34,15 @@
 .header__user {
   display: flex;
   align-items: center;
+}
+
+.header__username {
+  height: 25px;
+  width: 157px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24.8px;
 }
 
 .header__avatar {
