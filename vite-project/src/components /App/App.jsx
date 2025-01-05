@@ -32,6 +32,7 @@ function App() {
           <button onClick={() => setIsAddClothesModalOpen(false)}>Close</button>
         </div>
       )}
+      <Main />
       <Footer />
     </div>
   );
