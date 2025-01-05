@@ -3,7 +3,7 @@ import "./Header.css";
 import Logo from "../../assets/Logo.svg";
 import Avatar from "../../assets/Avatar (2).png";
 
-function Header({ onAddClothes }) {
+function Header({ handleAddClick }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -12,22 +12,18 @@ function Header({ onAddClothes }) {
   return (
     <header className="header">
       <div className="header__logo">
-        <img src="./src/assets/Logo.svg" alt="WTWR Logo" />
+        <img src={Logo} alt="WTWR Logo" />
       </div>
       <div className="header__info">
         <p className="header__date">{currentDate}</p>
-        <p className="header__location"> ,New York</p> {/* Hardcoded for now */}
+        <p className="header__location">, New York</p>
       </div>
-      <button className="header__add-clothes-button" onClick={onAddClothes}>
+      <button className="header__add-clothes-button" onClick={handleAddClick}>
         + Add Clothes
       </button>
       <div className="header__user">
-        <p className="header__username">John Doe</p> {/* Hardcoded for now */}
-        <img
-          className="header__avatar"
-          src="./src/assets/Avatar (2).png"
-          alt="User Avatar"
-        />
+        <p className="header__username">John Doe</p>
+        <img className="header__avatar" src={Avatar} alt="User Avatar" />
       </div>
     </header>
   );

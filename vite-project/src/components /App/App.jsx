@@ -3,30 +3,45 @@ import React from "react";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
-import "./App.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./App.css";
 
 function App() {
+  const [activeModal, setActiveModal] = useState("");
   const [weatherData, setWeatherData] = useState({ type: "cold" });
+
+  const handleAddClick = () => {
+    setActiveModal("add-garment");
+  };
+
+  const handleCloseModal = () => {
+    setActiveModal("");
+  };
+
   return (
     <div className="app">
       <div className="page__content">
-        <Header />
+        <Header handleAddClick={handleAddClick} />
         <Main weatherData={weatherData} />
       </div>
-      <ModalWithForm title="New garment" buttonText="Add Garment">
+      <ModalWithForm
+        title="New garment"
+        buttonText="Add Garment"
+        activeModal={activeModal}
+        onClose={handleCloseModal}
+      >
         <label htmlFor="name" className="modal__label">
-          Name{" "}
+          Name
           <input
             type="text"
             className="modal__input"
             id="name"
-            placeholder="name"
+            placeholder="Name"
             required
           />
         </label>
         <label htmlFor="imageUrl" className="modal__label">
-          Image{" "}
+          Image
           <input
             type="url"
             className="modal__input"
