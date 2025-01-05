@@ -1,5 +1,7 @@
 import React from "react";
 import "./Header.css";
+import Logo from "../../assets/Logo.svg";
+import Avatar from "../../assets/Avatar (2).png";
 
 function Header({ onAddClothes }) {
   const currentDate = new Date().toLocaleString("default", {
@@ -14,7 +16,7 @@ function Header({ onAddClothes }) {
       </div>
       <div className="header__info">
         <p className="header__date">{currentDate}</p>
-        <p className="header__location">New York</p> {/* Hardcoded for now */}
+        <p className="header__location"> ,New York</p> {/* Hardcoded for now */}
       </div>
       <button className="header__add-clothes-button" onClick={onAddClothes}>
         + Add Clothes
