@@ -3,9 +3,11 @@ import "./ItemCard.css";
 
 function ItemCard({ item }) {
   return (
-    <div key={item._id}>
-      <h2>{item.name}</h2>
-      <img src={item.link} alt={item.name} />
+    <div className="item-card">
+      <img src={item.link} alt={item.name} className="item-card__image" />
+      <div className="item-card__title-background">
+        <h2 className="item-card__title">{item.name}</h2>
+      </div>
     </div>
   );
 }

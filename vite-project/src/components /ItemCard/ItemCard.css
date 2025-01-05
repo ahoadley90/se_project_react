@@ -1,0 +1,38 @@
+.item-card {
+  position: relative;
+  width: 100%;
+  height: 328px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.item-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-card__title-background {
+  position: absolute;
+  top: 15px;
+  left: 125px;
+  right: 125px;
+  background-color: white;
+  padding: 2px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-card__title {
+  margin: 0;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.cards__list {
+  gap: 8px;
+}
