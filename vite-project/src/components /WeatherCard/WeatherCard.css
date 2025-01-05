@@ -22,3 +22,9 @@
   object-position: right top;
   width: 100%;
 }
+
+.cards__text {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 20px;
+  line-height: 24.8px;
+}

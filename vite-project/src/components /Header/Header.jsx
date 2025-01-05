@@ -11,19 +11,22 @@ function Header({ handleAddClick }) {
 
   return (
     <header className="header">
-      <div className="header__logo">
-        <img src={Logo} alt="WTWR Logo" />
+      <div className="header__left">
+        <div className="header__logo">
+          <img src={Logo} alt="WTWR Logo" />
+        </div>
+        <div className="header__info">
+          <p className="header__date">{currentDate}, New York</p>
+        </div>
       </div>
-      <div className="header__info">
-        <p className="header__date">{currentDate}</p>
-        <p className="header__location">, New York</p>
-      </div>
-      <button className="header__add-clothes-button" onClick={handleAddClick}>
-        + Add Clothes
-      </button>
-      <div className="header__user">
-        <p className="header__username">John Doe</p>
-        <img className="header__avatar" src={Avatar} alt="User Avatar" />
+      <div className="header__right">
+        <button className="header__add-clothes-button" onClick={handleAddClick}>
+          + Add Clothes
+        </button>
+        <div className="header__user">
+          <p className="header__username">John Doe</p>
+          <img className="header__avatar" src={Avatar} alt="User Avatar" />
+        </div>
       </div>
     </header>
   );

@@ -23,6 +23,7 @@ function App() {
       <div className="page__content">
         <Header handleAddClick={handleAddClick} />
         <Main weatherData={weatherData} />
+        <Footer />
       </div>
       <ModalWithForm
         title="New garment"
@@ -90,7 +91,6 @@ function App() {
           </label>
         </fieldset>
       </ModalWithForm>
-      <Footer />
     </div>
   );
 }
