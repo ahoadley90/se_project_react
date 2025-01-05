@@ -3,9 +3,9 @@ import "./ItemCard.css";
 
 function ItemCard({ item }) {
   return (
-    <div className="item-card">
-      <img src={item.imageUrl} alt={item.name} />
-      <h3>{item.name}</h3>
+    <div key={item._id}>
+      <h2>{item.name}</h2>
+      <img src={item.link} alt={item.name} />
     </div>
   );
 }

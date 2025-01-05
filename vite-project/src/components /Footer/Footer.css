@@ -1,13 +1,20 @@
 .footer {
   flex-shrink: 0;
   padding: 20px;
-  text-align: center;
-  justify-content: space-between;
   background-color: #f8f8f8;
   border-top: 1px solid #e7e7e7;
 }
 
-.footer p {
+.footer__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.footer__copyright,
+.footer__year {
   margin: 0;
   font-size: 14px;
   color: #666;

@@ -6,7 +6,10 @@ function Footer() {
 
   return (
     <footer className="footer">
-      <p>© {currentYear} Amanda Kim. All rights reserved.</p>
+      <div className="footer__content">
+        <p className="footer__copyright">© Amanda Kim</p>
+        <p className="footer__year">{currentYear}</p>
+      </div>
     </footer>
   );
 }
