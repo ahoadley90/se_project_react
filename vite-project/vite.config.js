@@ -6,11 +6,4 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@import "./src/vendor/normalize.css"; @import "./src/vendor/fonts.css";`,
-      },
-    },
-  },
 });
