@@ -12,9 +12,9 @@ function App() {
   const [weatherData, setWeatherData] = useState({ type: "hot" });
   const [selectedCard, setSelectedCard] = useState({});
 
-  const handleCardClick = (card) => {
+  const handleCardClick = (item) => {
     setActiveModal("preview");
-    setSelectedCard(card);
+    setSelectedCard(item);
   };
 
   const handleAddClick = () => {
