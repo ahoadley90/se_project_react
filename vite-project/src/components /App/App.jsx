@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { getWeather } from "../../utils/weatherApi.js";
 import React from "react";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -6,10 +7,11 @@ import Footer from "../Footer/Footer";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./App.css";
 import ItemModal from "../ItemModal/ItemModal";
+import { coordinates, APIkey } from "../../utils/constants";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
-  const [weatherData, setWeatherData] = useState({ type: "hot" });
+  const [weatherData, setWeatherData] = useState({ type: "all" });
   const [selectedCard, setSelectedCard] = useState({});
 
   const handleCardClick = (item) => {
@@ -25,6 +27,14 @@ function App() {
     setActiveModal("");
     setSelectedCard({});
   };
+
+  useEffect(() => {
+    getWeather(coordinates, APIkey)
+      .then((data) => {
+        setWeatherData(data);
+      })
+      .catch(console.error);
+  }, []);
 
   return (
     <div className="app">
