@@ -1,0 +1,130 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.3s, opacity 0.3s linear;
+}
+
+.modal_opened {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 0s;
+}
+
+.modal__content {
+  position: relative;
+  max-width: 496px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.modal__title {
+  margin: 0;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+.modal__close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  border: none;
+  background: none;
+  color: #000;
+  cursor: pointer;
+  padding: 28px 28px 36px;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+}
+
+.modal__input {
+  display: block;
+  width: 440px;
+  height: 24px;
+  padding: 12px;
+  font-size: 16px;
+  margin-top: 8px;
+  border: none;
+  border-bottom: 1px solid #000;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.modal__radio-buttons {
+  border: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal__submit {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 124px;
+  height: 36px;
+  width: 124px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  gap: 4px;
+  text-transform: capitalize;
+}
+
+.modal__submit:hover {
+  background-color: #0056b3;
+}
+
+.modal__close-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.modal__label {
+  width: 440px;
+  height: 52px;
+  border: 1px;
+}
+
+.modal__legend {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  margin-bottom: 12px;
+}
+
+.modal__radio-input {
+  color: #000;
+}
+
+.modal__submit span {
+  white-space: nowrap;
+}
