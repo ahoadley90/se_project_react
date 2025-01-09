@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getWeather } from "../../utils/weatherApi.js";
+import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import React from "react";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -11,7 +11,11 @@ import { coordinates, APIkey } from "../../utils/constants";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
-  const [weatherData, setWeatherData] = useState({ type: "all" });
+  const [weatherData, setWeatherData] = useState({
+    type: "",
+    temp: { F: 999, C: 999 },
+    city: "",
+  });
   const [selectedCard, setSelectedCard] = useState({});
 
   const handleCardClick = (item) => {
@@ -31,7 +35,8 @@ function App() {
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
-        setWeatherData(data);
+        const filteredData = filterWeatherData(data);
+        setWeatherData(filteredData);
       })
       .catch(console.error);
   }, []);
@@ -39,7 +44,7 @@ function App() {
   return (
     <div className="app">
       <div className="page__content">
-        <Header handleAddClick={handleAddClick} />
+        <Header handleAddClick={handleAddClick} weatherData={weatherData} />
         <Main weatherData={weatherData} handleCardClick={handleCardClick} />
         <Footer />
       </div>
