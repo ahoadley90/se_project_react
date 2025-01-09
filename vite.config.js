@@ -5,9 +5,6 @@ import path from "path";
 export default defineConfig({
   base: "/se_project_react/",
   plugins: [react()],
-  server: {
-    port: 3000,
-  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
