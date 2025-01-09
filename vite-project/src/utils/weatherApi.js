@@ -18,9 +18,14 @@ export const filterWeatherData = (data) => {
     C: Math.round(((data.main.temp - 32) * 5) / 9),
   };
   result.type = getWeatherType(data.main.temp);
+  result.condition = data.weather[0].main.toLowerCase();
+  result.isDay = isDay(data.sys, Date.now());
   return result;
 };
 
+export const isDay = ({ sunrise, sunset }, currentTime) => {
+  return sunrise * 1000 < currentTime && currentTime < sunset * 1000;
+};
 export const getWeatherType = (temperature) => {
   if (temperature > 86) {
     return "hot";
