@@ -6,13 +6,13 @@ export default defineConfig({
   plugins: [react()],
   base: "/se_project_react/",
   build: {
-    outDir: "../dist",
+    outDir: "dist",
     assetsDir: "assets",
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "../src"),
-      components: path.resolve(__dirname, "../components"),
+      "@": path.resolve(__dirname, "./src"),
+      components: path.resolve(__dirname, "./src/components"),
     },
   },
 });
