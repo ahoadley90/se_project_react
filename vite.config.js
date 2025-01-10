@@ -3,20 +3,16 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 
 export default defineConfig({
-  base: "/se_project_react/",
   plugins: [react()],
+  base: "/se_project_react/",
   build: {
-    outDir: "dist",
+    outDir: "../dist",
     assetsDir: "assets",
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, "index.html"),
-      },
-    },
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      "@": path.resolve(__dirname, "../src"),
+      components: path.resolve(__dirname, "../components"),
     },
   },
 });
