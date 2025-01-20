@@ -15,7 +15,7 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px; /* Updated to 8px as specified */
+  gap: 8px;
 }
 
 @media (max-width: 1200px) {
