@@ -21,8 +21,8 @@
   height: 28px;
   position: absolute;
   border-radius: 50%;
-  left: 0;
-  top: 0;
+  left: -2px;
+  top: 0px;
   transition: all 0.3s ease;
 }
 
