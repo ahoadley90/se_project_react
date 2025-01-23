@@ -2,6 +2,7 @@ import React from "react";
 import "./Header.css";
 import Logo from "../../assets/Logo.svg";
 import Avatar from "../../assets/Avatar (2).png";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
 function Header({ handleAddClick, weatherData }) {
   const currentDate = new Date().toLocaleString("default", {
@@ -22,6 +23,7 @@ function Header({ handleAddClick, weatherData }) {
         </div>
       </div>
       <div className="header__right">
+        <ToggleSwitch />
         <button className="header__add-clothes-button" onClick={handleAddClick}>
           + Add Clothes
         </button>
