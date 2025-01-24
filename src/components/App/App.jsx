@@ -9,6 +9,7 @@ import ItemModal from "../ItemModal/ItemModal.jsx";
 import { coordinates, APIkey } from "../../utils/constants.js";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
+import { defaultClothingItems } from "../../utils/constants.js";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -20,6 +21,7 @@ function App() {
     isDay: false,
   });
   const [selectedCard, setSelectedCard] = useState({});
+  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
 
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const handleToggleSwitchChange = () => {
@@ -38,6 +40,14 @@ function App() {
   const handleCloseModal = () => {
     setActiveModal("");
     setSelectedCard({});
+  };
+
+  const handleAddItemModalSubmit = ({ name, link: imageUrl, weather }) => {
+    setClothingItems([
+      { name, link: imageUrl, weather, _id: Date.now() },
+      ...clothingItems,
+    ]);
+    handleCloseModal();
   };
 
   useEffect(() => {
@@ -64,12 +74,14 @@ function App() {
             weatherData={weatherData}
             handleCardClick={handleCardClick}
             currentTemperatureUnit={currentTemperatureUnit}
+            clothingItems={clothingItems}
           />
           <Footer />
         </div>
         <AddItemModal
           onClose={handleCloseModal}
           isOpen={activeModal === "add-garment"}
+          onAddItemModalSubmit={handleAddItemModalSubmit}
         ></AddItemModal>
         <ItemModal
           activeModal={activeModal}

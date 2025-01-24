@@ -2,9 +2,13 @@ import React from "react";
 import "./Main.css";
 import ItemCard from "../ItemCard/ItemCard";
 import WeatherCard from "../WeatherCard/WeatherCard";
-import { defaultClothingItems } from "../../utils/constants";
 
-function Main({ weatherData, handleCardClick, currentTemperatureUnit }) {
+function Main({
+  weatherData,
+  handleCardClick,
+  currentTemperatureUnit,
+  clothingItems,
+}) {
   const temperature = weatherData.temp[currentTemperatureUnit];
   return (
     <main>
@@ -15,8 +19,10 @@ function Main({ weatherData, handleCardClick, currentTemperatureUnit }) {
           wear:
         </p>
         <ul className="cards__list">
-          {defaultClothingItems
-            .filter((item) => item.weather === weatherData.type)
+          {clothingItems
+            .filter(
+              (item) => weatherData.type && item.weather === weatherData.type
+            )
             .map((item) => (
               <ItemCard
                 key={item._id}
