@@ -8,7 +8,8 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import "./App.css";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import { coordinates, APIkey } from "../../utils/constants.js";
-import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext.jsx";
+import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
+
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [weatherData, setWeatherData] = useState({
@@ -45,14 +46,23 @@ function App() {
       })
       .catch(console.error);
   }, []);
+
   return (
     <CurrentTemperatureUnitContext.Provider
-      value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+      value={{
+        currentTemperatureUnit,
+        handleToggleSwitchChange,
+        setCurrentTemperatureUnit,
+      }}
     >
       <div className="app">
         <div className="page__content">
           <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+          <Main
+            weatherData={weatherData}
+            handleCardClick={handleCardClick}
+            currentTemperatureUnit={currentTemperatureUnit}
+          />
           <Footer />
         </div>
         <ModalWithForm
@@ -133,6 +143,7 @@ function App() {
           activeModal={activeModal}
           item={selectedCard}
           onClose={handleCloseModal}
+          currentTemperatureUnit={currentTemperatureUnit}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

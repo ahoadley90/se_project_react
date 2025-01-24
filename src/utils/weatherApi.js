@@ -26,10 +26,11 @@ export const filterWeatherData = (data) => {
 export const isDay = ({ sunrise, sunset }, currentTime) => {
   return sunrise * 1000 < currentTime && currentTime < sunset * 1000;
 };
+
 export const getWeatherType = (temperature) => {
   if (temperature > 86) {
     return "hot";
-  } else if (temperature >= 66 && temperature < 85) {
+  } else if (temperature >= 66 && temperature <= 85) {
     return "warm";
   } else {
     return "cold";

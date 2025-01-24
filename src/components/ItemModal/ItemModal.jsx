@@ -1,5 +1,5 @@
 import React from "react";
-import closeButton from "../../assets/closebutton.png"; // Adjust the path as needed
+import closeButton from "../../assets/closebutton.png";
 import "./ItemModal.css";
 
 function ItemModal({ activeModal, item, onClose }) {
