@@ -28,7 +28,7 @@ function ItemModal({ activeModal, item, onClose, onDeleteClick }) {
           <p className="modal__weather">Weather: {item.weather}</p>
           <button
             type="button"
-            onClick={handleDelete}
+            onClick={onDeleteClick}
             className="modal__delete-button"
           >
             Delete Item
