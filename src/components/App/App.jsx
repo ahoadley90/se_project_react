@@ -12,7 +12,7 @@ import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitCon
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { defaultClothingItems } from "../../utils/constants.js";
 import Profile from "../Profile/Profile.jsx";
-import SideBar from "../SideBar/SideBar.jsx";
+import { getItems } from "../../utils/Api";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -61,6 +61,23 @@ function App() {
       })
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log("Data received from API:", data);
+        if (Array.isArray(data)) {
+          setClothingItems(data);
+        } else {
+          console.error("Received data is not an array:", data);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching items:", error);
+      });
+  }, []);
+
+  console.log("Current clothingItems state:", clothingItems);
 
   return (
     <CurrentTemperatureUnitContext.Provider

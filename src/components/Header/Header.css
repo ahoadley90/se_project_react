@@ -56,3 +56,8 @@
   height: 40px;
   border-radius: 50%;
 }
+
+.header__profile-link {
+  text-decoration: none;
+  color: #000;
+}
