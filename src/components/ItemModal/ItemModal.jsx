@@ -9,16 +9,6 @@ function ItemModal({ activeModal, item, onClose, onDeleteClick }) {
     onClose,
     onDeleteClick,
   });
-  if (!item || activeModal !== "preview") return null;
-  const handleDelete = () => {
-    console.log("handleDelete called, onDeleteClick:", onDeleteClick);
-    if (typeof onDeleteClick === "function") {
-      onDeleteClick(item);
-    } else {
-      console.error("onDeleteClick is not a function", onDelete);
-    }
-  };
-
   return (
     <div className={`modal ${activeModal === "preview" ? "modal_opened" : ""}`}>
       <div className="modal__content modal__content_type_image">

@@ -2,8 +2,6 @@ import React from "react";
 import "./DeleteConfirmationModal.css";
 
 function DeleteConfirmationModal({ isOpen, onClose, onConfirm }) {
-  if (!isOpen) return null;
-
   return (
     <div className={'modal ${isOpen && "modal_opened"} modal_type_confirm'}>
       <div className="modal__content-delete">
