@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import "./Profile.css";
-import SideBar from "../SideBar/SideBar.jsx";
-import ClothingSection from "../ClothingSection/ClothingSection.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
+import ClothingSection from "../ClothingSection/ClothingSection.jsx";
+import SideBar from "../SideBar/SideBar.jsx";
 
-function Profile() {
+function Profile({ clothingItems, onCardClick, onDeleteItem }) {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
@@ -24,12 +23,16 @@ function Profile() {
         <SideBar />
       </section>
       <section className="profile__clothes-section">
-        <ClothingSection onCardClick={handleCardClick} />
+        <ClothingSection
+          onCardClick={handleCardClick}
+          clothingItems={clothingItems}
+        />
       </section>
       <ItemModal
         activeModal={activeModal}
         item={selectedCard}
         onClose={handleCloseModal}
+        onDelete={onDeleteItem}
       />
     </div>
   );
