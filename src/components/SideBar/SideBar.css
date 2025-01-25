@@ -2,3 +2,11 @@
   height: 56px;
   width: 56px;
 }
+
+.sidebar__username {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  color: #333;
+}
