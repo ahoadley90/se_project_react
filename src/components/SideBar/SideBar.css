@@ -10,3 +10,10 @@
   margin-top: 10px;
   color: #333;
 }
+
+.sidebar {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  width: 250px;
+}

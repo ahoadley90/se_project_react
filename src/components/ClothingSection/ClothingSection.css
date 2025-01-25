@@ -1,5 +1,55 @@
 .clothing-section {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  justify-content: flex-end;
+  align-items: flex-start;
   padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.clothing-section__title {
+  font-size: 20px;
+  font-weight: 700;
+  font-family: "Cabinet Grotesk", sans-serif;
+  line-height: 24.8px;
+  color: #333333;
+
+  height: 25px;
+  text-align: center;
+  gap: 20px;
+  display: inline;
+  margin-right: 20px;
+}
+
+.clothing-section__add-button {
+  font-size: 20px;
+  height: 25px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 500;
+  color: black;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 24.8px;
+  display: inline;
+}
+
+.clothing-section__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.clothing-section__items {
+  display: grid; /* Use grid layout */
+  grid-template-rows: repeat(
+    auto-fill,
+    minmax(325px, 3fr)
+  ); /* Auto-adjust columns */
+  gap: 20px; /* Spacing between items */
+  padding: 20px; /* Padding around the grid */
 }
