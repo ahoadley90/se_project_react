@@ -4,8 +4,3 @@
   gap: 20px;
   padding: 20px;
 }
-
-.profile__clothing-section {
-  display: flex;
-  flex-direction: row;
-}
