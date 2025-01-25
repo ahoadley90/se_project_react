@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import ClothingSection from "../ClothingSection/ClothingSection.jsx";
 import SideBar from "../SideBar/SideBar.jsx";
+import "./Profile.css";
 
-function Profile({ clothingItems, onCardClick, onDeleteItem }) {
+function Profile({ clothingItems, onDeleteItem }) {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 

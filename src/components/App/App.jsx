@@ -13,6 +13,7 @@ import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import Profile from "../Profile/Profile.jsx";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal.jsx";
 import { getItems, deleteItem } from "../../utils/Api";
+import { addItem } from "../../utils/Api";
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [weatherData, setWeatherData] = useState({
@@ -24,14 +25,19 @@ function App() {
   });
   const [selectedCard, setSelectedCard] = useState({});
   const [clothingItems, setClothingItems] = useState([]);
-  const [isConfirmationModalOpen, setIsConfirmationModalOpen] = useState(false);
-  const [itemToDelete, setItemToDelete] = useState({});
+
+  const handleAddItemSubmit = (item) => {
+    addItem(item)
+      .then((newItem) => {
+        setClothingItems([newItem, ...clothingItems]);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   const handleDeleteClick = (item) => {
-    console.log("handleDeleteClick called", item);
-    setItemToDelete(item);
-    setIsConfirmationModalOpen(true);
-    setActiveModal("");
+    setActiveModal("confirm-delete");
   };
 
   const handleConfirmDelete = () => {
@@ -152,8 +158,8 @@ function App() {
           onDeleteClick={handleDeleteClick}
         />
         <DeleteConfirmationModal
-          isOpen={isConfirmationModalOpen}
-          onClose={() => setIsConfirmationModalOpen(false)}
+          isOpen={activeModal === "confirm-delete"}
+          onClose={() => setActiveModal("")}
           onConfirm={handleConfirmDelete}
         />
       </div>
