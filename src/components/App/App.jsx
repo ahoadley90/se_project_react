@@ -41,11 +41,11 @@ function App() {
   };
 
   const handleConfirmDelete = () => {
-    if (itemToDelete) {
-      deleteItem(itemToDelete._id)
+    if (selectedCard) {
+      deleteItem(selectedCard._id)
         .then(() => {
           setClothingItems((prevItems) =>
-            prevItems.filter((item) => item._id !== itemToDelete._id)
+            prevItems.filter((item) => item._id !== selectedCard._id)
           );
           setIsConfirmationModalOpen(false);
           setItemToDelete(null);
