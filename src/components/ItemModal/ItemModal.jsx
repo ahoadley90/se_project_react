@@ -15,7 +15,7 @@ function ItemModal({ activeModal, item, onClose, onDeleteClick }) {
     if (typeof onDeleteClick === "function") {
       onDeleteClick(item);
     } else {
-      console.error("onDeleteClick is not a function");
+      console.error("onDeleteClick is not a function", onDelete);
     }
   };
 
