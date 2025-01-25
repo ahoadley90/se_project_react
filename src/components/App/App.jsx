@@ -10,7 +10,6 @@ import ItemModal from "../ItemModal/ItemModal.jsx";
 import { coordinates, APIkey } from "../../utils/constants.js";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
-import { defaultClothingItems } from "../../utils/constants.js";
 import Profile from "../Profile/Profile.jsx";
 import { getItems } from "../../utils/Api";
 
@@ -24,7 +23,7 @@ function App() {
     isDay: false,
   });
   const [selectedCard, setSelectedCard] = useState({});
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
 
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const handleToggleSwitchChange = () => {
@@ -62,22 +61,24 @@ function App() {
       .catch(console.error);
   }, []);
 
+  App.jsx;
   useEffect(() => {
-    getItems()
-      .then((data) => {
-        console.log("Data received from API:", data);
-        if (Array.isArray(data)) {
-          setClothingItems(data);
+    const fetchItems = async () => {
+      try {
+        const items = await getItems();
+        console.log("Data received from API:", items);
+        if (Array.isArray(items)) {
+          setClothingItems(items);
         } else {
-          console.error("Received data is not an array:", data);
+          console.error("Received data is not an array:", items);
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching items:", error);
-      });
-  }, []);
+      }
+    };
 
-  console.log("Current clothingItems state:", clothingItems);
+    fetchItems();
+  }, []);
 
   return (
     <CurrentTemperatureUnitContext.Provider
