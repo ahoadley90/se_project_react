@@ -11,9 +11,8 @@ import { coordinates, APIkey } from "../../utils/constants.js";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import Profile from "../Profile/Profile.jsx";
-import { getItems } from "../../utils/Api";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal.jsx";
-
+import { getItems, deleteItem } from "../../utils/Api";
 function App() {
   const [activeModal, setActiveModal] = useState("");
   const [weatherData, setWeatherData] = useState({
@@ -29,6 +28,7 @@ function App() {
   const [itemToDelete, setItemToDelete] = useState({});
 
   const handleDeleteClick = (item) => {
+    console.log("handleDeleteClick called", item);
     setItemToDelete(item);
     setIsConfirmationModalOpen(true);
     setActiveModal("");
@@ -43,8 +43,9 @@ function App() {
           );
           setIsConfirmationModalOpen(false);
           setItemToDelete(null);
+          handleCloseModal();
         })
-        .catch((err) => console.error(err));
+        .catch((err) => console.error("Error deleting item:", err));
     }
   };
 
@@ -148,7 +149,7 @@ function App() {
           item={selectedCard}
           onClose={handleCloseModal}
           currentTemperatureUnit={currentTemperatureUnit}
-          onDelete={handleDeleteClick}
+          onDeleteClick={handleDeleteClick}
         />
         <DeleteConfirmationModal
           isOpen={isConfirmationModalOpen}
