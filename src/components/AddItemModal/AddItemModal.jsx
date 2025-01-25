@@ -1,6 +1,6 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./AddItemModal.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function AddItemModal({
   onClose,
@@ -20,6 +20,15 @@ export default function AddItemModal({
     setImageUrl("");
     setWeather("");
   };
+
+  useEffect(() => {
+    if (isOpen) {
+      setName("");
+      setImageUrl("");
+      setWeather("");
+    }
+  }, [isOpen]);
+
   return (
     <ModalWithForm
       title="New garment"

@@ -1,12 +1,5 @@
 .clothing-section {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
   align-content: space-around;
-  justify-content: flex-end;
-  align-items: flex-start;
-  padding: 20px;
-  box-sizing: border-box;
   border-radius: 10px;
 }
 
@@ -40,14 +33,13 @@
 .clothing-section__header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
 .clothing-section__items {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
   padding: 20px;
 }
