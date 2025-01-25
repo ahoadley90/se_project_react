@@ -11,6 +11,8 @@ import { coordinates, APIkey } from "../../utils/constants.js";
 import CurrentTemperatureUnitContext from "../contexts/CurrentTemperatureUnitContext";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import { defaultClothingItems } from "../../utils/constants.js";
+import Profile from "../Profile/Profile.jsx";
+import SideBar from "../SideBar/SideBar.jsx";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -83,7 +85,7 @@ function App() {
                 />
               }
             />
-            <Route path="/profile" element={<p>PROFILE</p>} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
           <Footer />
         </div>
