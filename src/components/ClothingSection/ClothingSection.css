@@ -45,11 +45,8 @@
 }
 
 .clothing-section__items {
-  display: grid; /* Use grid layout */
-  grid-template-rows: repeat(
-    auto-fill,
-    minmax(325px, 3fr)
-  ); /* Auto-adjust columns */
-  gap: 20px; /* Spacing between items */
-  padding: 20px; /* Padding around the grid */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }
