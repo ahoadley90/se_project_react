@@ -3,6 +3,9 @@ import "./ItemModal.css";
 import closeButton from "../../assets/closebutton.png";
 
 function ItemModal({ activeModal, item, onClose, onDeleteClick }) {
+  const handleDelete = () => {
+    onDeleteClick();
+  };
   console.log("ItemModal props:", {
     activeModal,
     item,
