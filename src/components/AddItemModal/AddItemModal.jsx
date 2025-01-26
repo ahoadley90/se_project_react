@@ -15,10 +15,11 @@ export default function AddItemModal({
   const handleWeatherChange = (e) => setWeather(e.target.value);
   const handleSubmit = (e) => {
     e.preventDefault();
+    const name = e.target.name.value;
+    const imageUrl = e.target.imageUrl.value;
+    const weather = e.target.weather.value;
+
     onAddItemModalSubmit({ name, imageUrl, weather });
-    setName("");
-    setImageUrl("");
-    setWeather("");
   };
 
   useEffect(() => {

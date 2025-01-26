@@ -148,8 +148,8 @@ function App() {
         <AddItemModal
           onClose={handleCloseModal}
           isOpen={activeModal === "add-garment"}
-          onAddItemModalSubmit={handleAddItemModalSubmit}
-        ></AddItemModal>
+          onAddItemModalSubmit={handleAddItemSubmit}
+        />
         <ItemModal
           activeModal={activeModal}
           item={selectedCard}
