@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ItemModal from "../ItemModal/ItemModal.jsx";
-import ClothingSection from "../ClothesSection/ClothesSection.jsx";
+import ClothesSection from "../ClothesSection/ClothesSection.jsx";
 import SideBar from "../SideBar/SideBar.jsx";
 import "./Profile.css";
 
@@ -24,7 +24,7 @@ function Profile({ clothingItems, onDeleteItem }) {
         <SideBar />
       </section>
       <section className="profile__clothes-section">
-        <ClothingSection
+        <ClothesSection
           onCardClick={handleCardClick}
           clothingItems={clothingItems}
         />

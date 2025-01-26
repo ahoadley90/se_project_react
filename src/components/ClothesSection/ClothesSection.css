@@ -1,9 +1,9 @@
-.clothing-section {
+.clothes-section {
   align-content: space-around;
   border-radius: 10px;
 }
 
-.clothing-section__title {
+.clothes-section__title {
   font-size: 20px;
   font-weight: 700;
   font-family: "Cabinet Grotesk", sans-serif;
@@ -17,7 +17,7 @@
   margin-right: 20px;
 }
 
-.clothing-section__add-button {
+.clothes-section__add-button {
   font-size: 20px;
   height: 25px;
   font-family: "Cabinet Grotesk", sans-serif;
@@ -30,7 +30,7 @@
   opacity: 60%;
 }
 
-.clothing-section__header {
+.clothes-section__header {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -38,7 +38,7 @@
   margin-left: 20px;
 }
 
-.clothing-section__items {
+.clothes-section__items {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 20px;
