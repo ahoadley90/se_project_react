@@ -4,7 +4,7 @@ import ClothesSection from "../ClothesSection/ClothesSection.jsx";
 import SideBar from "../SideBar/SideBar.jsx";
 import "./Profile.css";
 
-function Profile({ clothingItems, onDeleteItem }) {
+function Profile({ clothingItems, onCardClick, onDeleteItem, handleAddClick }) {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
@@ -20,13 +20,15 @@ function Profile({ clothingItems, onDeleteItem }) {
 
   return (
     <div className="profile">
-      <section className="profile">
+      <section className="profile__sidebar">
         <SideBar />
       </section>
       <section className="profile__clothes-section">
         <ClothesSection
-          onCardClick={handleCardClick}
+          onCardClick={onCardClick}
           clothingItems={clothingItems}
+          onDeleteItem={onDeleteItem}
+          handleAddClick={handleAddClick}
         />
       </section>
       <ItemModal

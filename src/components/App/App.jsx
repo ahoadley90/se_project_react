@@ -30,13 +30,14 @@ function App() {
     addItem(item)
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
+        handleCloseModal();
       })
       .catch((err) => {
         console.error(err);
       });
   };
 
-  const handleDeleteClick = (item) => {
+  const handleDeleteClick = () => {
     setActiveModal("confirm-delete");
   };
 
@@ -47,8 +48,6 @@ function App() {
           setClothingItems((prevItems) =>
             prevItems.filter((item) => item._id !== selectedCard._id)
           );
-          setIsConfirmationModalOpen(false);
-          setItemToDelete(null);
           handleCloseModal();
         })
         .catch((err) => console.error("Error deleting item:", err));
@@ -139,6 +138,7 @@ function App() {
                   clothingItems={clothingItems}
                   onCardClick={handleCardClick}
                   onDeleteItem={handleDeleteClick}
+                  handleAddClick={handleAddClick}
                 />
               }
             />
@@ -159,7 +159,7 @@ function App() {
         />
         <DeleteConfirmationModal
           isOpen={activeModal === "confirm-delete"}
-          onClose={() => setActiveModal("")}
+          onClose={handleCloseModal}
           onConfirm={handleConfirmDelete}
         />
       </div>
