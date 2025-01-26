@@ -12,7 +12,10 @@ function WeatherCard({ weatherData }) {
       option.condition === weatherData.condition
     );
   });
-  const weatherOptionUrl = filteredOptions[0]?.url || "";
+  const defaultOption = weatherOptions.find(
+    (option) => option.day === weatherData.isDay && option.condition === "storm"
+  );
+  const weatherOptionUrl = filteredOptions[0]?.url || defaultOption.url;
   const weatherOptionCondition =
     filteredOptions[0]?.condition || weatherData.condition;
 
