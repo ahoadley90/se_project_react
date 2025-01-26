@@ -12,12 +12,16 @@
 }
 
 .modal__content-delete {
+  display: flex;
+  flex-direction: column;
   background-color: white;
+  width: 670px;
+  height: 280px;
   padding: 20px;
   border-radius: 10px;
-  max-width: 300px;
-  width: 100%;
   text-align: center;
+  justify-content: center;
+  position: relative;
 }
 
 .modal__delete-button {
@@ -39,4 +43,52 @@
 
 .modal__delete-button:hover {
   color: #ff2200;
+}
+
+.modal__confirm-delete {
+  height: 48px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+.modal__confirm-action {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  height: 48px;
+}
+
+.modal__button.modal__button_type_confirm {
+  background-color: transparent;
+  border: none;
+  color: #ff4d00;
+  margin-top: 40px;
+}
+
+.modal__button.modal__button_type_cancel {
+  background-color: transparent;
+  border: none;
+  margin-top: 24px;
+}
+
+.modal__buttons {
+  display: flex;
+  flex-direction: column;
+}
+.modal__close-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
 }
