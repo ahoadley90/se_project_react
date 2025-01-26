@@ -1,7 +1,7 @@
 import React from "react";
 import ItemCard from "../ItemCard/ItemCard.jsx";
 import { defaultClothingItems } from "../../utils/constants.js";
-import "./ClothingSection.css";
+import "./ClothesSection.css";
 
 function ClothingSection({ onCardClick }) {
   const clothingItems = defaultClothingItems;
