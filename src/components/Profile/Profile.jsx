@@ -1,23 +1,9 @@
-import React, { useState } from "react";
-import ItemModal from "../ItemModal/ItemModal.jsx";
+import React from "react";
 import ClothesSection from "../ClothesSection/ClothesSection.jsx";
 import SideBar from "../SideBar/SideBar.jsx";
 import "./Profile.css";
 
 function Profile({ clothingItems, onCardClick, onDeleteItem, handleAddClick }) {
-  const [activeModal, setActiveModal] = useState("");
-  const [selectedCard, setSelectedCard] = useState({});
-
-  const handleCardClick = (item) => {
-    setActiveModal("preview");
-    setSelectedCard(item);
-  };
-
-  const handleCloseModal = () => {
-    setActiveModal("");
-    setSelectedCard({});
-  };
-
   return (
     <div className="profile">
       <section className="profile__sidebar">
@@ -31,12 +17,6 @@ function Profile({ clothingItems, onCardClick, onDeleteItem, handleAddClick }) {
           handleAddClick={handleAddClick}
         />
       </section>
-      <ItemModal
-        activeModal={activeModal}
-        item={selectedCard}
-        onClose={handleCloseModal}
-        onDelete={onDeleteItem}
-      />
     </div>
   );
 }
