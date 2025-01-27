@@ -15,7 +15,7 @@ export default function ToggleSwitch() {
       <span className="toggle-switch__slider"></span>
       <span
         stlye={{
-          color: '${currentTemperatureUnit === "F" ? "white" : "grey"}',
+          color: `${currentTemperatureUnit === "F" ? "white" : "grey"}`,
         }}
         className={"toggle-switch__text toggle-switch__text_F"}
       >
@@ -23,7 +23,7 @@ export default function ToggleSwitch() {
       </span>
       <span
         stlye={{
-          color: '${currentTemperatureUnit === "C" ? "white" : "grey"}',
+          color: `${currentTemperatureUnit === "F" ? "white" : "grey"}`,
         }}
         className={"toggle-switch__text toggle-switch__text_C"}
       >
