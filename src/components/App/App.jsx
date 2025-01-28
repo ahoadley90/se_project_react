@@ -73,21 +73,14 @@ function App() {
     setSelectedCard({});
   };
 
-  const handleAddItemModalSubmit = ({ name, link: imageUrl, weather }) => {
-    setClothingItems([
-      { name, link: imageUrl, weather, _id: Date.now() },
-      ...clothingItems,
-    ]);
-    handleCloseModal();
-  };
-
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
-        const filteredData = filterWeatherData(data);
-        setWeatherData(filteredData);
+        setWeatherData(data);
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Error fetching or processing weather data:", error);
+      });
   }, []);
 
   useEffect(() => {
@@ -126,7 +119,6 @@ function App() {
                 <Main
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
-                  currentTemperatureUnit={currentTemperatureUnit}
                   clothingItems={clothingItems}
                   onDelete={handleDeleteClick}
                 />
@@ -155,7 +147,6 @@ function App() {
           activeModal={activeModal}
           item={selectedCard}
           onClose={handleCloseModal}
-          currentTemperatureUnit={currentTemperatureUnit}
           onDeleteClick={handleDeleteClick}
         />
         <DeleteConfirmationModal
