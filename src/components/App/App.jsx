@@ -121,6 +121,7 @@ function App() {
                   handleCardClick={handleCardClick}
                   clothingItems={clothingItems}
                   onDelete={handleDeleteClick}
+                  currentTemperatureUnit={currentTemperatureUnit}
                 />
               }
             />
