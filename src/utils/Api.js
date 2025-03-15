@@ -8,13 +8,27 @@ export const checkResponse = (res) => {
 };
 
 export const getItems = () => {
+  console.log("Attempting to fetch items");
   return fetch(`${baseUrl}/items`, {
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
   })
-    .then(checkResponse)
+    .then((response) => {
+      if (!response.ok) {
+        return response.text().then((text) => {
+          throw new Error(
+            `HTTP error! status: ${response.status}, message: ${text}`
+          );
+        });
+      }
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Received items:", data);
+      return data;
+    })
     .catch((error) => {
       console.error("Error in getItems:", error);
       throw error;
