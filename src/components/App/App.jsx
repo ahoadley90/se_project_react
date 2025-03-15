@@ -40,6 +40,26 @@ function App() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
+  const getUserInfo = () => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      checkToken(jwt)
+        .then((res) => {
+          if (res) {
+            setIsLoggedIn(true);
+            setCurrentUser(res);
+          }
+        })
+        .catch((err) => console.log(err))
+        .finally(() => setIsLoading(false));
+    } else {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -58,23 +78,6 @@ function App() {
       .catch((error) => {
         console.error("Error fetching clothing items:", error);
       });
-  }, []);
-
-  useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      checkToken(jwt)
-        .then((res) => {
-          if (res) {
-            setIsLoggedIn(true);
-            setCurrentUser(res);
-          }
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setIsLoading(false));
-    } else {
-      setIsLoading(false);
-    }
   }, []);
 
   const handleCardClick = (item) => {
@@ -138,8 +141,8 @@ function App() {
       .then((data) => {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
-          setIsLoggedIn(true);
-          setCurrentUser(data.user);
+          getUserInfo();
+          navigate("/");
         }
       })
       .catch((err) => console.log(err));

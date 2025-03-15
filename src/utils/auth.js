@@ -36,6 +36,3 @@ export const checkToken = (token) => {
     },
   }).then(handleResponse);
 };
-
-export const login = signin;
-export const authorize = signin;
