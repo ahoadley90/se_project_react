@@ -1,22 +1,55 @@
-import React from "react";
-import ClothesSection from "../ClothesSection/ClothesSection.jsx";
-import SideBar from "../SideBar/SideBar.jsx";
-import "./Profile.css";
+import React, { useContext, useState } from "react";
+import ClothesSection from "../ClothesSection/ClothesSection";
+import SideBar from "../SideBar/SideBar";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import CurrentUserContext from "../../context/CurrentUserContext";
+import { updateUserProfile } from "../../utils/api";
 
-function Profile({ clothingItems, onCardClick, onDeleteItem, handleAddClick }) {
+function Profile({ clothingItems, onSelectCard, onAddClick, onSignOut }) {
+  const currentUser = useContext(CurrentUserContext);
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
+
+  const handleEditProfile = () => {
+    setIsEditProfileModalOpen(true);
+  };
+
+  const handleCloseEditProfileModal = () => {
+    setIsEditProfileModalOpen(false);
+  };
+
+  const handleUpdateUser = (userData) => {
+    updateUserProfile(userData)
+      .then((updatedUser) => {
+        // Update the current user context with the new data
+        // You'll need to implement this function in your App component
+        currentUser.updateUser(updatedUser);
+        handleCloseEditProfileModal();
+      })
+      .catch((error) => {
+        console.error("Error updating user profile:", error);
+      });
+  };
   return (
     <div className="profile">
-      <section className="profile__sidebar">
-        <SideBar />
-      </section>
-      <section className="profile__clothes-section">
+      <SideBar onSignOut={onSignOut} />
+      <div className="profile__content">
+        <div className="profile__header">
+          <h2 className="profile__title">Your Profile</h2>
+          <button className="profile__edit-button" onClick={handleEditProfile}>
+            Edit Profile
+          </button>
+        </div>
         <ClothesSection
-          onCardClick={onCardClick}
           clothingItems={clothingItems}
-          onDeleteItem={onDeleteItem}
-          handleAddClick={handleAddClick}
+          onSelectCard={onSelectCard}
+          onAddClick={onAddClick}
         />
-      </section>
+      </div>
+      <EditProfileModal
+        isOpen={isEditProfileModalOpen}
+        onClose={handleCloseEditProfileModal}
+        onUpdateUser={handleUpdateUser}
+      />
     </div>
   );
 }

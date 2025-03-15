@@ -7,37 +7,87 @@ export const checkResponse = (res) => {
   return Promise.reject(`Error: ${res.status}`);
 };
 
-function request(url, options) {
-  return fetch(url, options).then(checkResponse);
-}
-
 export const getItems = () => {
-  return request(`${baseUrl}/items`, {
-    method: "GET",
+  return fetch(`${baseUrl}/items`, {
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
     },
-  }).then((data) => {
-    console.log("API response:", data);
-    return data;
-  });
-};
-
-export const deleteItem = (id) => {
-  return request(`${baseUrl}/items/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  })
+    .then(checkResponse)
+    .catch((error) => {
+      console.error("Error in getItems:", error);
+      throw error;
+    });
 };
 
 export const addItem = (item) => {
-  return request(`${baseUrl}/items`, {
+  return fetch(`${baseUrl}/items`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify(item),
+  }).then(checkResponse);
+};
+
+export const deleteItem = (id) => {
+  return fetch(`${baseUrl}/items/${id}`, {
+    method: "DELETE",
+    headers: {
+      authorization: `Bearer ${getToken()}`,
+    },
+  }).then(checkResponse);
+};
+
+export const signup = ({ name, avatar, email, password }) => {
+  return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(item),
-  });
+    body: JSON.stringify({ name, avatar, email, password }),
+  }).then(checkResponse);
+};
+
+export const signin = ({ email, password }) => {
+  return fetch(`${baseUrl}/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  }).then(checkResponse);
+};
+
+export const updateUserProfile = (userData) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify(userData),
+  }).then(checkResponse);
+};
+
+export const addCardLike = (id, token) => {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+};
+
+export const removeCardLike = (id, token) => {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
 };
