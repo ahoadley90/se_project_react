@@ -4,6 +4,7 @@ import SideBar from "../SideBar/SideBar";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import { updateUserProfile } from "../../utils/api";
+import "./Profile.css";
 
 function Profile({ clothingItems, onSelectCard, onAddClick, onSignOut }) {
   const currentUser = useContext(CurrentUserContext);
