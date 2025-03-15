@@ -1,12 +1,5 @@
 const BASE_URL = "http://localhost:3001";
 
-function handleResponse(res) {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Error: ${res.status}`);
-}
-
 export const signup = (userData) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
@@ -36,3 +29,10 @@ export const checkToken = (token) => {
     },
   }).then(handleResponse);
 };
+
+function handleResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Error: ${res.status}`);
+}
