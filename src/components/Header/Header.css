@@ -61,3 +61,29 @@
   text-decoration: none;
   color: #000;
 }
+
+.header__date-location {
+  display: flex;
+  justify-content: start;
+  padding: 0;
+}
+
+.header__button-signup {
+  border: none;
+  padding: 20px;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  line-height: 24px;
+  height: 24px;
+  top: -20px;
+  cursor: pointer;
+}
+
+.header__button-login {
+  border: none;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  line-height: 24px;
+  height: 24px;
+  cursor: pointer;
+}

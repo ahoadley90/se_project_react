@@ -44,16 +44,16 @@ function Header({ onRegisterClick, onLoginClick, onLogout, weatherData }) {
                 </div>
               )}
             </div>
-            <button className="header__button" onClick={onLogout}>
+            <button className="header__button-logout" onClick={onLogout}>
               Log out
             </button>
           </>
         ) : (
           <>
-            <button className="header__button" onClick={onRegisterClick}>
+            <button className="header__button-signup" onClick={onRegisterClick}>
               Sign Up
             </button>
-            <button className="header__button" onClick={onLoginClick}>
+            <button className="header__button-login" onClick={onLoginClick}>
               Log In
             </button>
           </>
