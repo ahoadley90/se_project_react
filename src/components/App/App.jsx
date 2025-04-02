@@ -42,19 +42,16 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   const getUserInfo = () => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      checkToken(jwt)
-        .then((res) => {
-          if (res) {
-            setIsLoggedIn(true);
-            setCurrentUser(res);
-          }
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      checkToken(token)
+        .then((userData) => {
+          setCurrentUser(userData);
+          setIsLoggedIn(true);
         })
-        .catch((err) => console.log(err))
-        .finally(() => setIsLoading(false));
-    } else {
-      setIsLoading(false);
+        .catch((err) => {
+          console.error("Error checking token:", err);
+        });
     }
   };
   useEffect(() => {
@@ -137,16 +134,16 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-  const handleLogin = (userData) => {
-    signin(userData)
+  const handleLogin = ({ email, password }) => {
+    signin({ email, password })
       .then((data) => {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
+          setIsLoggedIn(true);
           getUserInfo();
-          navigate("/");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const handleLogout = () => {
