@@ -1,11 +1,10 @@
 @font-face {
   font-family: "Cabinet Grotesk";
-  src: url("./CabinetGrotesk-Regular.woff2") format("woff2"),
-    url("./CabinetGrotesk-Regular.woff") format("woff"),
-    url("./CabinetGrotesk-Regular.ttf") format("truetype");
+  src: url("/fonts/CabinetGrotesk-Regular.woff2") format("woff2"),
+    url("/fonts/CabinetGrotesk-Regular.woff") format("woff"),
+    url("/fonts/CabinetGrotesk-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
 }
 
 @font-face {

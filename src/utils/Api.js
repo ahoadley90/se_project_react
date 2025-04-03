@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl = "/api";
 
 export const checkResponse = (res) => {
   if (res.ok) {
@@ -6,7 +6,6 @@ export const checkResponse = (res) => {
   }
   return Promise.reject(`Error: ${res.status}`);
 };
-
 export const getItems = () => {
   console.log("Attempting to fetch items");
   return fetch(`${baseUrl}/items`, {
@@ -54,7 +53,6 @@ export const deleteItem = (id) => {
     },
   }).then(checkResponse);
 };
-
 export const signup = ({ name, avatar, email, password }) => {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
