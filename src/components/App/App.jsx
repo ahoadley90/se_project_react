@@ -51,9 +51,18 @@ function App() {
         })
         .catch((err) => {
           console.error("Error checking token:", err);
+          localStorage.removeItem("jwt"); // Remove invalid token
+          setIsLoggedIn(false);
+          setCurrentUser(null);
+        })
+        .finally(() => {
+          setIsLoading(false);
         });
+    } else {
+      setIsLoading(false);
     }
   };
+
   useEffect(() => {
     getUserInfo();
   }, []);
@@ -166,6 +175,9 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <CurrentTemperatureUnitContext.Provider
