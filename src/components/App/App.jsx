@@ -22,7 +22,11 @@ import { updateUserProfile } from "../../utils/api.js";
 import { signin, signup, checkToken } from "../../utils/auth";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../context/CurrentUserContext";
-import { coordinates, APIkey } from "../../utils/constants.js";
+import {
+  coordinates,
+  APIkey,
+  defaultClothingItems,
+} from "../../utils/constants.js";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -78,16 +82,26 @@ function App() {
   }, []);
 
   useEffect(() => {
+    console.log("Fetching items...");
     getItems()
       .then((items) => {
-        setClothingItems(items);
+        console.log("Fetched items:", items);
+        if (items.length === 0) {
+          // If the API returns an empty array, combine with default items
+          setClothingItems([...defaultClothingItems, ...items]);
+        } else {
+          setClothingItems(items);
+        }
       })
       .catch((error) => {
         console.error("Error fetching clothing items:", error);
+        // errror = defaultclothing
+        setClothingItems(defaultClothingItems);
       });
   }, []);
 
   const handleCardClick = (item) => {
+    console.log("Card clicked:", item);
     setSelectedCard(item);
     setActiveModal("preview");
   };
@@ -113,19 +127,24 @@ function App() {
   };
 
   const handleDeleteClick = () => {
+    console.log("Delete button clicked, selectedCard:", selectedCard);
     setActiveModal("confirm-delete");
   };
 
   const handleConfirmDelete = () => {
-    if (selectedCard) {
+    console.log("Confirming delete for item:", selectedCard);
+    if (selectedCard && selectedCard._id) {
       deleteItem(selectedCard._id)
         .then(() => {
+          console.log("Item deleted successfully");
           setClothingItems((prevItems) =>
             prevItems.filter((item) => item._id !== selectedCard._id)
           );
           handleCloseModal();
         })
         .catch((err) => console.error("Error deleting item:", err));
+    } else {
+      console.error("No item selected for deletion");
     }
   };
 
@@ -150,9 +169,18 @@ function App() {
           localStorage.setItem("jwt", data.token);
           setIsLoggedIn(true);
           getUserInfo();
+          handleCloseModal();
         }
       })
       .catch((err) => console.error(err));
+  };
+
+  const handleLoginModalOpen = () => {
+    setActiveModal("login");
+  };
+
+  const handleRegisterModalOpen = () => {
+    setActiveModal("register");
   };
 
   const handleLogout = () => {
@@ -201,6 +229,7 @@ function App() {
                   onSelectCard={handleCardClick}
                   clothingItems={clothingItems}
                   onCardLike={handleCardLike}
+                  onAddClick={handleAddClick}
                 />
               }
             />
@@ -224,8 +253,9 @@ function App() {
               onClose={handleCloseModal}
             />
           )}
-          {activeModal === "preview" && (
+          {activeModal === "preview" && selectedCard && (
             <ItemModal
+              activeModal={activeModal}
               item={selectedCard}
               onClose={handleCloseModal}
               onDelete={handleDeleteClick}
@@ -233,6 +263,7 @@ function App() {
           )}
           {activeModal === "confirm-delete" && (
             <DeleteConfirmationModal
+              isOpen={activeModal === "confirm-delete"}
               onClose={handleCloseModal}
               onConfirm={handleConfirmDelete}
             />
@@ -242,6 +273,7 @@ function App() {
               isOpen={activeModal === "register"}
               onClose={handleCloseModal}
               onRegister={handleRegister}
+              onLoginClick={handleLoginModalOpen}
             />
           )}
           {activeModal === "login" && (
@@ -249,6 +281,7 @@ function App() {
               isOpen={activeModal === "login"}
               onClose={handleCloseModal}
               onLogin={handleLogin}
+              onRegisterClick={handleRegisterModalOpen}
             />
           )}
         </div>

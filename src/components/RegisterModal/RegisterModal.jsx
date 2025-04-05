@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-export default function RegisterModal({ isOpen, onClose, onRegister }) {
+export default function RegisterModal({
+  isOpen,
+  onClose,
+  onRegister,
+  onLoginClick,
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -62,6 +67,15 @@ export default function RegisterModal({ isOpen, onClose, onRegister }) {
           onChange={(e) => setAvatar(e.target.value)}
         />
       </label>
+      <div className="modal__button-container">
+        <button
+          type="button"
+          className="modal__switch-button"
+          onClick={onLoginClick}
+        >
+          or Log in
+        </button>
+      </div>
     </ModalWithForm>
   );
 }
