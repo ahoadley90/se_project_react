@@ -84,22 +84,25 @@ function App() {
 
   useEffect(() => {
     console.log("Fetching items...");
-    getItems()
-      .then((items) => {
-        console.log("Fetched items:", items);
-        if (items.length === 0) {
-          // If the API returns an empty array, combine with default items
-          setClothingItems([...defaultClothingItems, ...items]);
-        } else {
-          setClothingItems(items);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching clothing items:", error);
-        // errror = defaultclothing
-        setClothingItems(defaultClothingItems);
-      });
-  }, []);
+    if (isLoggedIn) {
+      getItems()
+        .then((items) => {
+          console.log("Fetched items:", items);
+          if (items.length === 0) {
+            setClothingItems(defaultClothingItems);
+          } else {
+            setClothingItems(items);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching clothing items:", error);
+          setClothingItems(defaultClothingItems);
+        });
+    } else {
+      console.log("User not logged in, using default items");
+      setClothingItems(defaultClothingItems);
+    }
+  }, [isLoggedIn]);
 
   const handleCardClick = (item) => {
     console.log("Card clicked:", item);

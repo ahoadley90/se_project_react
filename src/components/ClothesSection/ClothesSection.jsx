@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import ItemCard from "../ItemCard/ItemCard.jsx";
+import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
 import CurrentUserContext from "../../context/CurrentUserContext";
 
@@ -8,6 +8,7 @@ function ClothesSection({
   onSelectCard,
   onCardLike,
   handleAddClick,
+  isLoggedIn,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -33,6 +34,7 @@ function ClothesSection({
             item={item}
             onSelectCard={() => onSelectCard(item)}
             onCardLike={onCardLike}
+            isLoggedIn={isLoggedIn}
           />
         ))}
       </div>

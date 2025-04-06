@@ -1,31 +1,32 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./ItemCard.css";
-import CurrentUserContext from "../../context/CurrentUserContext";
 
-function ItemCard({ item, onSelectCard, onDeleteItem }) {
-  const handleClick = () => {
-    onSelectCard(item);
+function ItemCard({ item, onSelectCard, onCardLike, isLoggedIn }) {
+  const handleLikeClick = () => {
+    onCardLike(item);
   };
 
   return (
-    <div className="card" onClick={handleClick}>
+    <div className="card">
       <img
-        src={item.link || item.imageUrl}
+        src={item.imageUrl || item.link}
         alt={item.name}
         className="card__image"
+        onClick={() => onSelectCard(item)}
       />
-      {onDeleteItem && (
-        <button
-          className="card__delete-button"
-          onClick={(e) => {
-            e.stopPropagation();
-            onDeleteItem(item._id);
-          }}
-        >
-          Delete
-        </button>
-      )}
-      <div className="card__name">{item.name}</div>
+      <div className="card__info">
+        <p className="card__name">{item.name}</p>
+        {isLoggedIn && (
+          <button
+            className={`card__like-button ${
+              item.isLiked ? "card__like-button_active" : ""
+            }`}
+            onClick={handleLikeClick}
+          >
+            ♥
+          </button>
+        )}
+      </div>
     </div>
   );
 }
