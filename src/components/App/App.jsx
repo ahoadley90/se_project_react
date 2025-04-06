@@ -173,6 +173,11 @@ function App() {
           localStorage.setItem("jwt", data.token);
           setIsLoggedIn(true);
           getUserInfo();
+          getItems()
+            .then((items) => setClothingItems(items))
+            .catch((err) =>
+              console.error("Error fetching items after login:", err)
+            );
           handleCloseModal();
         }
       })
@@ -234,6 +239,7 @@ function App() {
                   clothingItems={clothingItems}
                   onCardLike={handleCardLike}
                   onAddClick={handleAddClick}
+                  isLoggedIn={isLoggedIn}
                 />
               }
             />
@@ -245,6 +251,7 @@ function App() {
                   onSelectCard={handleCardClick}
                   onAddClick={handleAddClick}
                   onSignOut={handleLogout}
+                  isLoggedIn={isLoggedIn}
                 />
               }
             />

@@ -21,8 +21,6 @@ function Profile({ clothingItems, onSelectCard, onAddClick, onSignOut }) {
   const handleUpdateUser = (userData) => {
     updateUserProfile(userData)
       .then((updatedUser) => {
-        // Update the current user context with the new data
-        // You'll need to implement this function in your App component
         currentUser.updateUser(updatedUser);
         handleCloseEditProfileModal();
       })
