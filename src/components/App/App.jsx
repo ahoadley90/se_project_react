@@ -17,8 +17,9 @@ import {
   addItem,
   addCardLike,
   removeCardLike,
+  updateUserProfile,
 } from "../../utils/api.js";
-import { updateUserProfile } from "../../utils/api.js";
+
 import { signin, signup, checkToken } from "../../utils/auth";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../context/CurrentUserContext";
@@ -55,7 +56,7 @@ function App() {
         })
         .catch((err) => {
           console.error("Error checking token:", err);
-          localStorage.removeItem("jwt"); // Remove invalid token
+          localStorage.removeItem("jwt");
           setIsLoggedIn(false);
           setCurrentUser(null);
         })

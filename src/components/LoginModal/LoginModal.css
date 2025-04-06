@@ -1,12 +1,18 @@
 .modal__switch-button {
+  display: flex;
   background: none;
   border: none;
-  color: #000;
+  color: gray;
   cursor: pointer;
   font-size: 16px;
-  margin-right: -100px;
+  margin-right: -10px;
 }
 
 .modal__switch-button:hover {
   opacity: 0.6;
+}
+
+.modal__button-container {
+  background-color: none;
+  border: none;
 }

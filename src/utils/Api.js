@@ -84,15 +84,20 @@ export const signin = ({ email, password }) => {
   }).then(checkResponse);
 };
 
-export const updateUserProfile = (userData) => {
-  return fetch(`${baseUrl}/users/me`, {
+export const updateUserProfile = (token, userData) => {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${getToken()}`,
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(userData),
-  }).then(checkResponse);
+  }).then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error: ${res.status}`);
+  });
 };
 
 export const addCardLike = (id, token) => {

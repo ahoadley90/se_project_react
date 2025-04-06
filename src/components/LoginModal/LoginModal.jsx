@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-
+import "./LoginModal.css";
 export default function LoginModal({
   isOpen,
   onClose,
