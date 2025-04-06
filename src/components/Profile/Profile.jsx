@@ -6,7 +6,13 @@ import CurrentUserContext from "../../context/CurrentUserContext";
 import { updateUserProfile } from "../../utils/api";
 import "./Profile.css";
 
-function Profile({ clothingItems, onSelectCard, onAddClick, onSignOut }) {
+function Profile({
+  clothingItems,
+  onSelectCard,
+  onAddClick,
+  onSignOut,
+  isLoggedIn,
+}) {
   const currentUser = useContext(CurrentUserContext);
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
 
@@ -42,6 +48,7 @@ function Profile({ clothingItems, onSelectCard, onAddClick, onSignOut }) {
           clothingItems={clothingItems}
           onSelectCard={onSelectCard}
           onAddClick={onAddClick}
+          isLoggedIn={isLoggedIn}
         />
       </div>
       <EditProfileModal

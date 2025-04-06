@@ -3,6 +3,7 @@ import "./ItemCard.css";
 
 function ItemCard({ item, onSelectCard, onCardLike, isLoggedIn }) {
   const handleLikeClick = () => {
+    e.stopPropagation();
     onCardLike(item);
   };
 

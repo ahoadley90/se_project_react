@@ -1,7 +1,7 @@
 import React from "react";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ClothesSection from "../ClothesSection/ClothesSection";
-
+import "./Main.css";
 function Main({
   weatherData,
   onSelectCard,

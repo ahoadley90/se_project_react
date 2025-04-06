@@ -96,3 +96,8 @@
   height: 24px;
   cursor: pointer;
 }
+
+.header__avatar-image {
+  height: 56px;
+  width: 56px;
+}
