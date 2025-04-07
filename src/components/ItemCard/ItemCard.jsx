@@ -9,14 +9,15 @@ function ItemCard({
   currentUser,
   onDeleteClick,
 }) {
+  console.log("ItemCard rendering", item, currentUser);
   const handleLikeClick = (e) => {
     e.stopPropagation();
     onCardLike(item);
   };
 
   const isLiked =
-    item.likes &&
     currentUser &&
+    item.likes &&
     item.likes.some((id) => id === currentUser._id);
 
   const handleDeleteClick = (e) => {
@@ -25,6 +26,7 @@ function ItemCard({
   };
 
   const isOwner = currentUser && item.owner === currentUser._id;
+
   return (
     <div className="item-card" onClick={() => onSelectCard(item)}>
       <img
@@ -35,7 +37,7 @@ function ItemCard({
       <div className="item-card__title-background">
         <div className="item-card__title">{item.name}</div>
       </div>
-      {isLoggedIn && (
+      {isLoggedIn && currentUser && (
         <>
           <button
             className={`item-card__like-button ${
@@ -56,14 +58,7 @@ function ItemCard({
               />
             </svg>
           </button>
-          {isOwner && (
-            <button
-              className="item-card__delete-button"
-              onClick={handleDeleteClick}
-            >
-              Delete
-            </button>
-          )}
+          {isOwner}
         </>
       )}
     </div>

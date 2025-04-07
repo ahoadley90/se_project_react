@@ -5,7 +5,13 @@ import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import CurrentUserContext from "../../context/CurrentUserContext";
 import "./Header.css";
 
-function Header({ onRegisterClick, onLoginClick, onLogout, weatherData }) {
+function Header({
+  onRegisterClick,
+  onLoginClick,
+  weatherData,
+  onAddNewClick,
+  onEditProfile,
+}) {
   const currentUser = useContext(CurrentUserContext);
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -14,22 +20,29 @@ function Header({ onRegisterClick, onLoginClick, onLogout, weatherData }) {
 
   return (
     <header className="header">
-      <div className="header__logo">
-        <Link to="/">
-          <img src={logo} alt="WTWR logo" />
-        </Link>
+      <div className="header__left">
+        <div className="header__logo">
+          <Link to="/">
+            <img src={logo} alt="WTWR logo" />
+          </Link>
+        </div>
+        <div className="header__date-location">
+          <p className="header__date">
+            {currentDate}, {weatherData?.city}
+          </p>
+        </div>
       </div>
-      <div className="header__date-location">
-        {currentDate}, {weatherData?.city}
-      </div>
-      <div className="header__avatar-logo">
+      <div className="header__right">
         <ToggleSwitch />
         {currentUser ? (
-          <>
+          <div className="header__user">
+            <button className="header__button-add" onClick={onAddNewClick}>
+              + Add clothes
+            </button>
             <Link to="/profile" className="header__profile-link">
-              {currentUser.name}
+              <p className="header__username">{currentUser.name}</p>
             </Link>
-            <div className="header__avatar-container">
+            <div className="header__avatar" onClick={onEditProfile}>
               {currentUser.avatar ? (
                 <img
                   src={currentUser.avatar}
@@ -44,19 +57,16 @@ function Header({ onRegisterClick, onLoginClick, onLogout, weatherData }) {
                 </div>
               )}
             </div>
-            <button className="header__button-logout" onClick={onLogout}>
-              Log out
-            </button>
-          </>
+          </div>
         ) : (
-          <>
+          <div className="header__auth-buttons">
             <button className="header__button-signup" onClick={onRegisterClick}>
               Sign Up
             </button>
             <button className="header__button-login" onClick={onLoginClick}>
               Log In
             </button>
-          </>
+          </div>
         )}
       </div>
     </header>

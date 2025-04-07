@@ -11,6 +11,7 @@ function Main({
   isLoggedIn,
   currentUser,
   onDeleteClick,
+  onAddClick,
 }) {
   const getWeatherType = (temp) => {
     if (temp >= 86) return "hot";
@@ -19,13 +20,7 @@ function Main({
   };
   return (
     <main className="main">
-      {weatherData && (
-        <WeatherCard
-          day={weatherData.isDay}
-          type={weatherData.condition}
-          weatherTemp={weatherData.temp.F}
-        />
-      )}
+      {weatherData && <WeatherCard WeatherCard weatherData={weatherData} />}
       <section className="card-section">
         <div className="card-section__title">
           Today is {weatherData && Math.round(weatherData.temp.F)}°F / You may
@@ -38,7 +33,7 @@ function Main({
             )
             .map((item) => (
               <ItemCard
-                key={item._id}
+                key={`${item._id}-${item.likes ? item.likes.length : 0}`}
                 item={item}
                 onSelectCard={onSelectCard}
                 onCardLike={onCardLike}

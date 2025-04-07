@@ -1,6 +1,8 @@
 .profile {
   display: flex;
-  padding: 20px;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .profile__content {
@@ -12,22 +14,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .profile__title {
   font-family: "Cabinet Grotesk", sans-serif;
-  font-weight: 700;
   font-size: 20px;
   line-height: 25px;
+  font-weight: 700;
 }
 
-.profile__edit-button {
+.profile__add-button {
+  background: none;
   font-family: "Cabinet Grotesk", sans-serif;
-  font-weight: 700;
+  border: none;
+  color: #000;
   font-size: 20px;
   line-height: 24px;
-  border: none;
-  background: none;
+  font-weight: 700;
   cursor: pointer;
 }

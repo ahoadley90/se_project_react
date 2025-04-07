@@ -199,19 +199,21 @@ function App() {
     navigate("/");
   };
 
-  const handleCardLike = (item) => {
-    const token = localStorage.getItem("jwt");
+  const handleCardLike = (card) => {
     const isLiked =
-      item.likes && item.likes.some((id) => id === currentUser._id);
+      card.likes && card.likes.some((id) => id === currentUser._id);
+    const likeAction = isLiked ? removeCardLike : addCardLike;
 
-    (isLiked ? removeCardLike : addCardLike)(item._id, token)
+    likeAction(card._id)
       .then((updatedCard) => {
-        setClothingItems((items) =>
-          items.map((i) => (i._id === updatedCard._id ? updatedCard : i))
+        setClothingItems((prevItems) =>
+          prevItems.map((item) =>
+            item._id === updatedCard._id ? updatedCard : item
+          )
         );
       })
       .catch((err) => {
-        console.error("Error updating like:", err);
+        console.log(err);
       });
   };
 
@@ -225,12 +227,11 @@ function App() {
       >
         <div className="page">
           <Header
-            isLoggedIn={isLoggedIn}
             onRegisterClick={() => setActiveModal("register")}
             onLoginClick={() => setActiveModal("login")}
             onLogout={handleLogout}
-            onAddClick={handleAddClick}
             weatherData={weatherData}
+            onAddNewClick={handleAddClick}
           />
           <Routes>
             <Route
@@ -257,6 +258,8 @@ function App() {
                   onAddClick={handleAddClick}
                   onSignOut={handleLogout}
                   isLoggedIn={isLoggedIn}
+                  onCardLike={handleCardLike}
+                  currentUser={currentUser}
                 />
               }
             />
