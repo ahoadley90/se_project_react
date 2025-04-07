@@ -1,23 +1,54 @@
 import React from "react";
 import WeatherCard from "../WeatherCard/WeatherCard";
-import ClothesSection from "../ClothesSection/ClothesSection";
+import ItemCard from "../ItemCard/ItemCard";
 import "./Main.css";
+
 function Main({
   weatherData,
-  onSelectCard,
   clothingItems,
+  onSelectCard,
   onCardLike,
-  onAddClick,
+  isLoggedIn,
+  currentUser,
+  onDeleteClick,
 }) {
+  const getWeatherType = (temp) => {
+    if (temp >= 86) return "hot";
+    if (temp >= 66 && temp <= 85) return "warm";
+    return "cold";
+  };
   return (
     <main className="main">
-      <WeatherCard weatherData={weatherData} />
-      <ClothesSection
-        clothingItems={clothingItems}
-        onSelectCard={onSelectCard}
-        onCardLike={onCardLike}
-        handleAddClick={onAddClick}
-      />
+      {weatherData && (
+        <WeatherCard
+          day={weatherData.isDay}
+          type={weatherData.condition}
+          weatherTemp={weatherData.temp.F}
+        />
+      )}
+      <section className="card-section">
+        <div className="card-section__title">
+          Today is {weatherData && Math.round(weatherData.temp.F)}°F / You may
+          want to wear:
+        </div>
+        <div className="card-section__items">
+          {clothingItems
+            .filter(
+              (item) => item.weather === getWeatherType(weatherData?.temp.F)
+            )
+            .map((item) => (
+              <ItemCard
+                key={item._id}
+                item={item}
+                onSelectCard={onSelectCard}
+                onCardLike={onCardLike}
+                isLoggedIn={isLoggedIn}
+                currentUser={currentUser}
+                onDeleteClick={onDeleteClick}
+              />
+            ))}
+        </div>
+      </section>
     </main>
   );
 }

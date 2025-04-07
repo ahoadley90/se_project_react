@@ -10,11 +10,11 @@
   margin-bottom: 20px;
 }
 
-.cards__list {
+.card-section__items {
   list-style: none;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 8px;
 }
 

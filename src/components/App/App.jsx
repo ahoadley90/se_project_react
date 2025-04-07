@@ -201,15 +201,18 @@ function App() {
 
   const handleCardLike = (item) => {
     const token = localStorage.getItem("jwt");
-    const isLiked = item.likes.some((id) => id === currentUser._id);
+    const isLiked =
+      item.likes && item.likes.some((id) => id === currentUser._id);
 
     (isLiked ? removeCardLike : addCardLike)(item._id, token)
       .then((updatedCard) => {
         setClothingItems((items) =>
-          items.map((i) => (i._id === item._id ? updatedCard : i))
+          items.map((i) => (i._id === updatedCard._id ? updatedCard : i))
         );
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error("Error updating like:", err);
+      });
   };
 
   if (isLoading) {
@@ -240,6 +243,8 @@ function App() {
                   onCardLike={handleCardLike}
                   onAddClick={handleAddClick}
                   isLoggedIn={isLoggedIn}
+                  currentUser={currentUser}
+                  onDeleteClick={handleDeleteClick}
                 />
               }
             />

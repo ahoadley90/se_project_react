@@ -17,7 +17,7 @@ function ClothesSection({
     : clothingItems;
 
   return (
-    <div className="clothes-section">
+    <section className="clothes-section">
       <div className="clothes-section__header">
         <h2 className="clothes-section__title">Your items</h2>
         <button
@@ -27,18 +27,18 @@ function ClothesSection({
           + Add new
         </button>
       </div>
-      <div className="clothes-section__cards">
+      <div className="clothes-section__items">
         {userClothingItems.map((item) => (
           <ItemCard
             key={item._id}
             item={item}
-            onSelectCard={() => onSelectCard(item)}
+            onSelectCard={onSelectCard}
             onCardLike={onCardLike}
             isLoggedIn={isLoggedIn}
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 }
 

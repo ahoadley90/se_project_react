@@ -36,3 +36,45 @@
 .cards__list {
   gap: 8px;
 }
+.item-card__like-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-card__like-button svg {
+  width: 20px;
+  height: 18px;
+}
+
+.item-card__like-button svg path {
+  transition: fill 0.3s ease;
+}
+
+.item-card__like-button_active svg path {
+  fill: black;
+}
+.item-card__delete-button {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-size: 14px;
+}
+
+.item-card__delete-button:hover {
+  background: rgba(0, 0, 0, 0.5);
+}

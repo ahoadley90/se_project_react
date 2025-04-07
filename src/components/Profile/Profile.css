@@ -1,11 +1,33 @@
 .profile {
   display: flex;
-  flex-direction: row;
-  gap: 20px;
   padding: 20px;
 }
 
-.profile__clothes-section {
+.profile__content {
   flex-grow: 1;
-  margin-top: 40px;
+  margin-left: 20px;
+}
+
+.profile__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.profile__title {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.profile__edit-button {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
