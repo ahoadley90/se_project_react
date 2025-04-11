@@ -58,11 +58,16 @@ export const deleteItem = (id) => {
   return fetch(`${BASE_URL}/items/${id}`, {
     method: "DELETE",
     headers: {
-      authorization: `Bearer ${getToken()}`,
+      "Content-Type": "application/json",
     },
   }).then((res) => {
     console.log("Delete response:", res);
-    return checkResponse(res);
+    return res.text().then((text) => {
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}, message: ${text}`);
+      }
+      return text ? JSON.parse(text) : {};
+    });
   });
 };
 

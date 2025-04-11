@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import "./Main.css";
+import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnitContext";
 
 function Main({
   weatherData,
@@ -13,27 +14,28 @@ function Main({
   onDeleteClick,
   onAddClick,
 }) {
+  const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const getWeatherType = (temp) => {
     if (temp >= 86) return "hot";
     if (temp >= 66 && temp <= 85) return "warm";
     return "cold";
   };
+
+  const temperature = weatherData?.temp?.[currentTemperatureUnit] || 0;
   return (
     <main className="main">
-      {weatherData && <WeatherCard WeatherCard weatherData={weatherData} />}
+      {weatherData && <WeatherCard weatherData={weatherData} />}
       <section className="card-section">
         <div className="card-section__title">
-          Today is {weatherData && Math.round(weatherData.temp.F)}°F / You may
+          Today is {Math.round(temperature)}°{currentTemperatureUnit} / You may
           want to wear:
         </div>
         <div className="card-section__items">
           {clothingItems
-            .filter(
-              (item) => item.weather === getWeatherType(weatherData?.temp.F)
-            )
+            .filter((item) => item.weather === getWeatherType(temperature))
             .map((item) => (
               <ItemCard
-                key={`${item._id}-${item.likes ? item.likes.length : 0}`}
+                key={item._id}
                 item={item}
                 onSelectCard={onSelectCard}
                 onCardLike={onCardLike}

@@ -146,7 +146,9 @@ function App() {
           );
           handleCloseModal();
         })
-        .catch((err) => console.error("Error deleting item:", err));
+        .catch((err) => {
+          console.error("Error deleting item:", err.message);
+        });
     } else {
       console.error("No item selected for deletion");
     }
@@ -200,12 +202,37 @@ function App() {
   };
 
   const handleCardLike = (card) => {
-    const isLiked =
-      card.likes && card.likes.some((id) => id === currentUser._id);
-    const likeAction = isLiked ? removeCardLike : addCardLike;
+    const isLiked = isLoggedIn
+      ? card.likes && card.likes.some((id) => id === currentUser?._id)
+      : card.likes && card.likes.includes("anonymous");
 
+    setClothingItems((prevItems) =>
+      prevItems.map((item) =>
+        item._id === card._id
+          ? {
+              ...item,
+              likes: isLiked
+                ? item.likes.filter(
+                    (id) => id !== (isLoggedIn ? currentUser?._id : "anonymous")
+                  )
+                : [
+                    ...(item.likes || []),
+                    isLoggedIn ? currentUser?._id : "anonymous",
+                  ],
+            }
+          : item
+      )
+    );
+
+    if (!isLoggedIn) {
+      return;
+    }
+
+    // For logged-in users, make the API call
+    const likeAction = isLiked ? removeCardLike : addCardLike;
     likeAction(card._id)
       .then((updatedCard) => {
+        // Update with the server response
         setClothingItems((prevItems) =>
           prevItems.map((item) =>
             item._id === updatedCard._id ? updatedCard : item
@@ -214,6 +241,10 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        // Revert the optimistic update on error
+        setClothingItems((prevItems) =>
+          prevItems.map((item) => (item._id === card._id ? card : item))
+        );
       });
   };
 

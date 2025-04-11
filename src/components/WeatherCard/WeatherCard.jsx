@@ -7,6 +7,8 @@ import { useContext } from "react";
 function WeatherCard({ weatherData }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
+  const temperature = weatherData?.temp?.[currentTemperatureUnit] || 0;
+
   if (!weatherData) {
     return <div className="weather-card">Loading weather data...</div>;
   }
@@ -24,7 +26,6 @@ function WeatherCard({ weatherData }) {
   const weatherOptionUrl = filteredOptions[0]?.url || defaultOption?.url || "";
   const weatherOptionCondition =
     filteredOptions[0]?.condition || weatherData.condition || "Unknown";
-
   return (
     <section className="weather-card">
       <p className="weather-card__temp">
