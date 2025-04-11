@@ -2,9 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0;
+  padding: 20px;
   margin-right: 100px;
   margin-top: 20px;
+  width: 229px;
+  box-sizing: border-box;
 }
 
 .sidebar__avatar {
@@ -12,6 +14,8 @@
   height: 56px;
   border-radius: 50%;
   margin-bottom: 16px;
+  object-fit: cover;
+  margin-right: 16px;
 }
 
 .sidebar__info {
@@ -19,13 +23,23 @@
   flex-direction: column;
   align-items: flex-start;
 }
+
+.sidebar__user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
 .sidebar__username {
   font-size: 20px;
   font-weight: 700;
-  font-family: "Cabinet Grotesk", sans-serif;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
   color: #000;
   margin-bottom: 8px;
   line-height: 25px;
+  width: 157px;
+  height: 25px;
+  margin: 0;
 }
 
 .sidebar__signout-button {
@@ -34,8 +48,30 @@
   color: #000;
   font-size: 20px;
   font-weight: 700;
-  font-family: "Cabinet Grotesk", sans-serif;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
   cursor: pointer;
   padding: 0;
   line-height: 24px;
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar__button {
+  background: none;
+  border: none;
+  font-family: "Cabinet Grotesk", Arial, sans-serif;
+  font-size: 20px;
+  line-height: 25px;
+  color: #000000;
+  text-align: left;
+  padding: 5px 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar__button:hover {
+  opacity: 0.6;
 }

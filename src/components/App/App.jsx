@@ -10,6 +10,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import { getWeather } from "../../utils/weatherApi";
 import {
   getItems,
@@ -45,6 +46,21 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
+
+  const handleEditProfileClick = () => {
+    setIsEditProfileModalOpen(true);
+  };
+
+  const handleUpdateUser = (userData) => {
+    const token = localStorage.getItem("jwt");
+    updateUserProfile(token, userData)
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        closeAllModals();
+      })
+      .catch((err) => console.log(err));
+  };
 
   const getUserInfo = () => {
     const token = localStorage.getItem("jwt");
@@ -258,6 +274,11 @@ function App() {
       });
   };
 
+  const closeAllModals = () => {
+    setActiveModal("");
+    setIsEditProfileModalOpen(false);
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -301,6 +322,7 @@ function App() {
                   isLoggedIn={isLoggedIn}
                   onCardLike={handleCardLike}
                   currentUser={currentUser}
+                  onEditProfile={handleEditProfileClick}
                 />
               }
             />
@@ -344,6 +366,12 @@ function App() {
               onRegisterClick={handleRegisterModalOpen}
             />
           )}
+          <EditProfileModal
+            isOpen={isEditProfileModalOpen}
+            onClose={closeAllModals}
+            onUpdateUser={handleUpdateUser}
+            currentUser={currentUser}
+          />
         </div>
       </CurrentTemperatureUnitContext.Provider>
     </CurrentUserContext.Provider>
