@@ -64,4 +64,4 @@ function ItemCard({
   );
 }
 
-export default React.memo(ItemCard);
+export default ItemCard;
