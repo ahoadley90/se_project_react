@@ -138,17 +138,27 @@ function App() {
   const handleConfirmDelete = () => {
     console.log("Confirming delete for item:", selectedCard);
     if (selectedCard && selectedCard._id) {
-      deleteItem(selectedCard._id)
-        .then(() => {
-          console.log("Item deleted successfully");
-          setClothingItems((prevItems) =>
-            prevItems.filter((item) => item._id !== selectedCard._id)
-          );
-          handleCloseModal();
-        })
-        .catch((err) => {
-          console.error("Error deleting item:", err.message);
-        });
+      if (isLoggedIn) {
+        // For logged-in users, make the API call
+        deleteItem(selectedCard._id)
+          .then(() => {
+            console.log("Item deleted successfully");
+            setClothingItems((prevItems) =>
+              prevItems.filter((item) => item._id !== selectedCard._id)
+            );
+            handleCloseModal();
+          })
+          .catch((err) => {
+            console.error("Error deleting item:", err.message);
+          });
+      } else {
+        // For non-logged-in users, just update the UI
+        console.log("Non-logged-in user, updating UI only");
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== selectedCard._id)
+        );
+        handleCloseModal();
+      }
     } else {
       console.error("No item selected for deletion");
     }

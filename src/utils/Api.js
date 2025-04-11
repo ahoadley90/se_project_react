@@ -55,10 +55,13 @@ export const addItem = (item) => {
 
 export const deleteItem = (id) => {
   console.log("Attempting to delete item with id:", id);
+  const token = localStorage.getItem("jwt");
+  console.log("Token being sent:", token);
   return fetch(`${BASE_URL}/items/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
     },
   }).then((res) => {
     console.log("Delete response:", res);
