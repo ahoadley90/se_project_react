@@ -7,17 +7,18 @@ function Profile({
   clothingItems,
   onSelectCard,
   onAddClick,
-  onSignOut,
-  onEditProfile,
   onCardLike,
   isLoggedIn,
   currentUser,
+  onEditProfile,
+  onSignOut,
 }) {
   return (
     <div className="profile">
       <SideBar
         onSignOut={onSignOut}
         onEditProfile={onEditProfile}
+        onAddNew={onAddClick}
         currentUser={currentUser}
       />
       <div className="profile__content">

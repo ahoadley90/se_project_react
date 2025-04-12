@@ -7,7 +7,7 @@ function ClothesSection({
   clothingItems,
   onSelectCard,
   onCardLike,
-  handleAddClick,
+  onAddClick,
   isLoggedIn,
 }) {
   const currentUser = useContext(CurrentUserContext);
@@ -20,10 +20,7 @@ function ClothesSection({
     <section className="clothes-section">
       <div className="clothes-section__header">
         <h2 className="clothes-section__title">Your items</h2>
-        <button
-          className="clothes-section__add-button"
-          onClick={handleAddClick}
-        >
+        <button className="clothes-section__add-button" onClick={onAddClick}>
           + Add new
         </button>
       </div>

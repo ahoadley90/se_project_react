@@ -267,7 +267,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-        // Revert the optimistic update on error
+
         setClothingItems((prevItems) =>
           prevItems.map((item) => (item._id === card._id ? card : item))
         );
