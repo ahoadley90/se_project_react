@@ -1,3 +1,5 @@
+import { checkResponse } from "./api";
+
 const BASE_URL = "http://localhost:3001";
 
 export const signup = (userData) => {
@@ -17,7 +19,7 @@ export const signin = (userData) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(userData),
-  }).then(handleResponse);
+  }).then(checkResponse);
 };
 
 export const checkToken = (token) => {
@@ -27,11 +29,5 @@ export const checkToken = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then(handleResponse);
+  }).then(checkResponse);
 };
-function handleResponse(res) {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(`Error: ${res.status}`);
-}

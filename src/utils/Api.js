@@ -18,16 +18,7 @@ export const getItems = () => {
       authorization: `Bearer ${getToken()}`,
     },
   })
-    .then((response) => {
-      if (!response.ok) {
-        return response.text().then((text) => {
-          throw new Error(
-            `HTTP error! status: ${response.status}, message: ${text}`
-          );
-        });
-      }
-      return response.json();
-    })
+    .then(checkResponse)
     .then((data) => {
       console.log("Received items:", data);
       return data;
@@ -55,7 +46,7 @@ export const addItem = (item) => {
 
 export const deleteItem = (id) => {
   console.log("Attempting to delete item with id:", id);
-  const token = localStorage.getItem("jwt");
+  const token = getToken();
   console.log("Token being sent:", token);
   return fetch(`${BASE_URL}/items/${id}`, {
     method: "DELETE",
@@ -63,15 +54,12 @@ export const deleteItem = (id) => {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  }).then((res) => {
-    console.log("Delete response:", res);
-    return res.text().then((text) => {
-      if (!res.ok) {
-        throw new Error(`HTTP error! status: ${res.status}, message: ${text}`);
-      }
-      return text ? JSON.parse(text) : {};
+  })
+    .then(checkResponse)
+    .then((data) => {
+      console.log("Delete response:", data);
+      return data;
     });
-  });
 };
 
 export const signup = ({ name, avatar, email, password }) => {
