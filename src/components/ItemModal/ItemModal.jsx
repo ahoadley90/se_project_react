@@ -2,10 +2,19 @@ import React from "react";
 import "./ItemModal.css";
 import closeButton from "../../assets/closebutton.png";
 
-function ItemModal({ activeModal, item, onClose, onDelete }) {
+function ItemModal({
+  activeModal,
+  item,
+  onClose,
+  onDelete,
+  isLoggedIn,
+  currentUser,
+}) {
   if (!item) {
     return null;
   }
+
+  const isOwner = isLoggedIn && currentUser && item.owner === currentUser._id;
 
   return (
     <div className={`modal ${activeModal === "preview" ? "modal_opened" : ""}`}>
@@ -21,13 +30,15 @@ function ItemModal({ activeModal, item, onClose, onDelete }) {
         <div className="modal__caption">
           <p className="modal__title">{item.name}</p>
           <p className="modal__weather">Weather: {item.weather}</p>
-          <button
-            type="button"
-            onClick={onDelete}
-            className="modal__delete-button"
-          >
-            Delete Item
-          </button>
+          {isOwner && (
+            <button
+              type="button"
+              onClick={onDelete}
+              className="modal__delete-button"
+            >
+              Delete Item
+            </button>
+          )}
         </div>
       </div>
     </div>

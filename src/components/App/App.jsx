@@ -124,6 +124,7 @@ function App() {
     console.log("Card clicked:", item);
     setSelectedCard(item);
     setActiveModal("preview");
+    console.log("Active modal set to:", "preview");
   };
 
   const handleAddClick = () => {
@@ -341,6 +342,8 @@ function App() {
               item={selectedCard}
               onClose={handleCloseModal}
               onDelete={handleDeleteClick}
+              currentUser={currentUser}
+              isLoggedIn={isLoggedIn}
             />
           )}
           {activeModal === "confirm-delete" && (
