@@ -8,16 +8,15 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser, currentUser }) {
 
   useEffect(() => {
     if (currentUser) {
-      setName(currentUser.name || "");
-      setAvatar(currentUser.avatar || "");
+      setName(currentUser.name);
+      setAvatar(currentUser.avatar);
     }
-  }, [currentUser, isOpen]);
+  }, [currentUser]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onUpdateUser({ name, avatar });
   };
-
   return (
     <ModalWithForm
       title="Change profile data"

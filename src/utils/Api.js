@@ -99,7 +99,7 @@ export const updateUserProfile = (token, userData) => {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(userData),
   }).then(checkResponse);

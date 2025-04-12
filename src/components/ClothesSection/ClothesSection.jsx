@@ -32,6 +32,7 @@ function ClothesSection({
             onSelectCard={onSelectCard}
             onCardLike={onCardLike}
             isLoggedIn={isLoggedIn}
+            currentUser={currentUser}
           />
         ))}
       </div>
