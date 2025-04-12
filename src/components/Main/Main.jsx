@@ -22,6 +22,8 @@ function Main({
   };
 
   const temperature = weatherData?.temp?.[currentTemperatureUnit] || 0;
+  const fahrenheitTemp = weatherData?.temp?.F || 0;
+
   return (
     <main className="main">
       {weatherData && <WeatherCard weatherData={weatherData} />}
@@ -32,7 +34,7 @@ function Main({
         </div>
         <div className="card-section__items">
           {clothingItems
-            .filter((item) => item.weather === getWeatherType(temperature))
+            .filter((item) => item.weather === getWeatherType(fahrenheitTemp))
             .map((item) => (
               <ItemCard
                 key={item._id}
