@@ -29,7 +29,8 @@ import {
   APIkey,
   defaultClothingItems,
 } from "../../utils/constants.js";
-import { pingServer } from "../../utils/Api.js";
+import { pingServer } from "../../utils/api.js";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -135,6 +136,7 @@ function App() {
   const handleCloseModal = () => {
     setActiveModal("");
     setSelectedCard({});
+    setIsEditProfileModalOpen(false);
   };
 
   const handleAddItemSubmit = (item) => {
@@ -277,8 +279,7 @@ function App() {
   };
 
   const closeAllModals = () => {
-    setActiveModal("");
-    setIsEditProfileModalOpen(false);
+    handleCloseModal();
   };
 
   useEffect(() => {
@@ -324,7 +325,6 @@ function App() {
                   onCardLike={handleCardLike}
                   onAddClick={handleAddClick}
                   isLoggedIn={isLoggedIn}
-                  currentUser={currentUser}
                   onDeleteClick={handleDeleteClick}
                 />
               }
@@ -332,16 +332,17 @@ function App() {
             <Route
               path="/profile"
               element={
-                <Profile
-                  clothingItems={clothingItems}
-                  onSelectCard={handleCardClick}
-                  onAddClick={handleAddClick}
-                  onSignOut={handleLogout}
-                  isLoggedIn={isLoggedIn}
-                  onCardLike={handleCardLike}
-                  currentUser={currentUser}
-                  onEditProfile={handleEditProfileClick}
-                />
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Profile
+                    clothingItems={clothingItems}
+                    onSelectCard={handleCardClick}
+                    onAddClick={handleAddClick}
+                    onSignOut={handleLogout}
+                    isLoggedIn={isLoggedIn}
+                    onCardLike={handleCardLike}
+                    onEditProfile={handleEditProfileClick}
+                  />
+                </ProtectedRoute>
               }
             />
           </Routes>
@@ -359,7 +360,6 @@ function App() {
               item={selectedCard}
               onClose={handleCloseModal}
               onDelete={handleDeleteClick}
-              currentUser={currentUser}
               isLoggedIn={isLoggedIn}
             />
           )}
@@ -390,7 +390,6 @@ function App() {
             isOpen={isEditProfileModalOpen}
             onClose={closeAllModals}
             onUpdateUser={handleUpdateUser}
-            currentUser={currentUser}
           />
         </div>
       </CurrentTemperatureUnitContext.Provider>

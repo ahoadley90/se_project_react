@@ -3,6 +3,7 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import "./Main.css";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnitContext";
+import CurrentUserContext from "../../context/CurrentUserContext";
 
 function Main({
   weatherData,
@@ -10,11 +11,11 @@ function Main({
   onSelectCard,
   onCardLike,
   isLoggedIn,
-  currentUser,
   onDeleteClick,
   onAddClick,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+  const currentUser = useContext(CurrentUserContext);
   const getWeatherType = (temp) => {
     if (temp >= 86) return "hot";
     if (temp >= 66 && temp <= 85) return "warm";

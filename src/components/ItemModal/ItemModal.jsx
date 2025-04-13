@@ -1,18 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./ItemModal.css";
 import closeButton from "../../assets/closebutton.png";
+import CurrentUserContext from "../../context/CurrentUserContext";
 
-function ItemModal({
-  activeModal,
-  item,
-  onClose,
-  onDelete,
-  isLoggedIn,
-  currentUser,
-}) {
-  if (!item) {
-    return null;
-  }
+function ItemModal({ activeModal, item, onClose, onDelete, isLoggedIn }) {
+  const currentUser = useContext(CurrentUserContext);
 
   const isOwner = isLoggedIn && currentUser && item.owner === currentUser._id;
 
