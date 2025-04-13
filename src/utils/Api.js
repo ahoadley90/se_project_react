@@ -3,6 +3,8 @@ const getToken = () => {
   return localStorage.getItem("jwt");
 };
 
+const TIMEOUT_DURATION = 30000;
+
 export const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
@@ -10,9 +12,32 @@ export const checkResponse = (res) => {
   return Promise.reject(`Error: ${res.status}`);
 };
 
+const fetchWithTimeout = (url, options) => {
+  return Promise.race([
+    fetch(url, options),
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("Request timed out")), TIMEOUT_DURATION)
+    ),
+  ]);
+};
+
+export const pingServer = () => {
+  return fetchWithTimeout(`${BASE_URL}/ping`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  })
+    .then(checkResponse)
+    .catch((error) => {
+      console.error("Error pinging server:", error);
+      throw error;
+    });
+};
+
 export const getItems = () => {
   console.log("Attempting to fetch items");
-  return fetch(`${BASE_URL}/items`, {
+  return fetchWithTimeout(`${BASE_URL}/items`, {
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${getToken()}`,
@@ -28,13 +53,12 @@ export const getItems = () => {
       throw error;
     });
 };
-
 export const addItem = (item) => {
   const token = getToken();
   if (!token) {
     return Promise.reject("User not authenticated");
   }
-  return fetch(`${BASE_URL}/items`, {
+  return fetchWithTimeout(`${BASE_URL}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

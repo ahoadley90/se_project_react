@@ -29,6 +29,7 @@ import {
   APIkey,
   defaultClothingItems,
 } from "../../utils/constants.js";
+import { pingServer } from "../../utils/Api.js";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -279,6 +280,22 @@ function App() {
     setActiveModal("");
     setIsEditProfileModalOpen(false);
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      const intervalId = setInterval(() => {
+        pingServer()
+          .then(() => {
+            console.log("Server pinged successfully");
+          })
+          .catch((error) => {
+            console.error("Failed to ping server:", error);
+          });
+      }, 50000); // Ping every 50 seconds
+
+      return () => clearInterval(intervalId);
+    }
+  }, [isLoggedIn]);
 
   if (isLoading) {
     return <div>Loading...</div>;
