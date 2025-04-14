@@ -1,4 +1,4 @@
-const BASE_URL = "/api";
+const BASE_URL = "http://localhost:3001";
 const getToken = () => {
   return localStorage.getItem("jwt");
 };
@@ -9,7 +9,7 @@ export const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject(`Error: ${res.status}`);
+  return res.json().then((err) => Promise.reject(err));
 };
 
 const fetchWithTimeout = (url, options) => {
@@ -53,6 +53,7 @@ export const getItems = () => {
       throw error;
     });
 };
+
 export const addItem = (item) => {
   const token = getToken();
   if (!token) {
@@ -71,8 +72,7 @@ export const addItem = (item) => {
 export const deleteItem = (id) => {
   console.log("Attempting to delete item with id:", id);
   const token = getToken();
-  console.log("Token being sent:", token);
-  return fetch(`${BASE_URL}/items/${id}`, {
+  return fetchWithTimeout(`${BASE_URL}/items/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -83,11 +83,15 @@ export const deleteItem = (id) => {
     .then((data) => {
       console.log("Delete response:", data);
       return data;
+    })
+    .catch((error) => {
+      console.error("Error deleting item:", error);
+      throw error;
     });
 };
 
 export const signup = ({ name, avatar, email, password }) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetchWithTimeout(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -97,7 +101,7 @@ export const signup = ({ name, avatar, email, password }) => {
 };
 
 export const signin = ({ email, password }) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetchWithTimeout(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -107,7 +111,7 @@ export const signin = ({ email, password }) => {
 };
 
 export const updateUserProfile = (token, userData) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetchWithTimeout(`${BASE_URL}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -118,7 +122,7 @@ export const updateUserProfile = (token, userData) => {
 };
 
 export const addCardLike = (id) => {
-  return fetch(`${BASE_URL}/items/${id}/likes`, {
+  return fetchWithTimeout(`${BASE_URL}/items/${id}/likes`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -128,7 +132,7 @@ export const addCardLike = (id) => {
 };
 
 export const removeCardLike = (id) => {
-  return fetch(`${BASE_URL}/items/${id}/likes`, {
+  return fetchWithTimeout(`${BASE_URL}/items/${id}/likes`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",

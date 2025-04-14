@@ -49,6 +49,7 @@ function App() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
+  const [error, setError] = useState("");
 
   const handleEditProfileClick = () => {
     setIsEditProfileModalOpen(true);
@@ -106,19 +107,16 @@ function App() {
       getItems()
         .then((items) => {
           console.log("Fetched items:", items);
-          if (items.length === 0) {
-            setClothingItems(defaultClothingItems);
-          } else {
-            setClothingItems(items);
-          }
+          setClothingItems(items);
         })
         .catch((error) => {
           console.error("Error fetching clothing items:", error);
-          setClothingItems(defaultClothingItems);
+          setError("Failed to fetch items. Please try again later.");
+          setClothingItems([]);
         });
     } else {
-      console.log("User not logged in, using default items");
-      setClothingItems(defaultClothingItems);
+      console.log("User not logged in, no items to display");
+      setClothingItems([]);
     }
   }, [isLoggedIn]);
 
@@ -159,7 +157,7 @@ function App() {
     console.log("Confirming delete for item:", selectedCard);
     if (selectedCard && selectedCard._id) {
       if (isLoggedIn) {
-        // For logged-in users, make the API call
+        setIsLoading(true);
         deleteItem(selectedCard._id)
           .then(() => {
             console.log("Item deleted successfully");
@@ -170,17 +168,18 @@ function App() {
           })
           .catch((err) => {
             console.error("Error deleting item:", err.message);
+            setError("Failed to delete item. Please try again later.");
+          })
+          .finally(() => {
+            setIsLoading(false);
           });
       } else {
-        // For non-logged-in users, just update the UI
-        console.log("Non-logged-in user, updating UI only");
-        setClothingItems((prevItems) =>
-          prevItems.filter((item) => item._id !== selectedCard._id)
-        );
-        handleCloseModal();
+        console.log("User not logged in, cannot delete item");
+        setError("You must be logged in to delete items.");
       }
     } else {
       console.error("No item selected for deletion");
+      setError("No item selected for deletion.");
     }
   };
 
@@ -258,11 +257,9 @@ function App() {
       return;
     }
 
-    // For logged-in users, make the API call
     const likeAction = isLiked ? removeCardLike : addCardLike;
     likeAction(card._id)
       .then((updatedCard) => {
-        // Update with the server response
         setClothingItems((prevItems) =>
           prevItems.map((item) =>
             item._id === updatedCard._id ? updatedCard : item
@@ -292,7 +289,7 @@ function App() {
           .catch((error) => {
             console.error("Failed to ping server:", error);
           });
-      }, 50000); // Ping every 50 seconds
+      }, 50000);
 
       return () => clearInterval(intervalId);
     }
