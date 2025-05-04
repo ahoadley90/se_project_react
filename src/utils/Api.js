@@ -1,4 +1,6 @@
-const BASE_URL = "http://localhost:3001";
+const BASE_URL = import.meta.env.PROD
+  ? "https://api.wtwrproject.twilightparadox.com"
+  : "http://localhost:3001";
 const getToken = () => {
   return localStorage.getItem("jwt");
 };
