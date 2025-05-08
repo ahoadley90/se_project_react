@@ -11,7 +11,7 @@
     "lint:fix": "eslint . --ext js,jsx --fix",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "npm run build && scp -r ./dist/* your-username@wtwrproject.twilightparadox.com:/home/your-username/frontend"
+    "deploy": "npm run build && scp -r ./dist/* akimmets@wtwrproject.twilightparadox.com:/home/akimmets/frontend"
   },
   "dependencies": {
     "celebrate": "^15.0.3",
