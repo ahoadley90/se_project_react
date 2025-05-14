@@ -2,7 +2,7 @@ import { checkResponse } from "./Api";
 
 const BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "https://api.yourdomain.com"
+    ? "https://api.wtwrproject.twilightparadox.com"
     : "http://localhost:3001";
 
 export const signup = (userData) => {
