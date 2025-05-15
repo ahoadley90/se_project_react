@@ -16,7 +16,7 @@ export const signup = (userData) => {
 };
 
 export const signin = (userData) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return fetch(`/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -26,7 +26,7 @@ export const signin = (userData) => {
 };
 
 export const checkToken = (token) => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return fetch(`/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
