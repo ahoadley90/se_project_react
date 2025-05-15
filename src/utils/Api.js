@@ -1,7 +1,4 @@
-const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://api.wtwrproject.twilightparadox.com"
-    : "http://localhost:3001";
+const BASE_URL = "https://api.wtwrproject.twilightparadox.com";
 const getToken = () => {
   return localStorage.getItem("jwt");
 };

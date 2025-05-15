@@ -12,7 +12,7 @@ export const signup = (userData) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(userData),
-  }).then(handleResponse);
+  }).then(checkResponse);
 };
 
 export const signin = (userData) => {

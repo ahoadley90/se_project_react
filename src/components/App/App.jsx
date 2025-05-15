@@ -19,7 +19,7 @@ import {
   addCardLike,
   removeCardLike,
   updateUserProfile,
-} from "../../utils/api.js";
+} from "../../utils/Api.js";
 
 import { signin, signup, checkToken } from "../../utils/auth";
 import CurrentTemperatureUnitContext from "../../context/CurrentTemperatureUnitContext";
@@ -29,7 +29,7 @@ import {
   APIkey,
   defaultClothingItems,
 } from "../../utils/constants.js";
-import { pingServer } from "../../utils/api.js";
+import { pingServer } from "../../utils/Api.js";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
