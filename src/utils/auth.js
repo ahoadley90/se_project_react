@@ -1,12 +1,7 @@
-import { checkResponse } from "./Api";
-
-const BASE_URL =
-  process.env.NODE_ENV === "production"
-    ? "https://api.wtwrproject.twilightparadox.com"
-    : "http://localhost:3001";
+import { BASE_URL, checkResponse } from "./Api";
 
 export const signup = (userData) => {
-  return fetch(`/signup`, {
+  return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -16,7 +11,7 @@ export const signup = (userData) => {
 };
 
 export const signin = (userData) => {
-  return fetch(`/signin`, {
+  return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -26,7 +21,7 @@ export const signin = (userData) => {
 };
 
 export const checkToken = (token) => {
-  return fetch(`/users/me`, {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

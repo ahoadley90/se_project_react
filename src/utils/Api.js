@@ -1,19 +1,22 @@
-const BASE_URL =
+export const BASE_URL =
   process.env.NODE_ENV === "production"
     ? "https://api.wtwrproject.twilightparadox.com"
     : "/api";
 
-const getToken = () => {
+export const getToken = () => {
   return localStorage.getItem("jwt");
 };
 
-const TIMEOUT_DURATION = 30000;
+export const TIMEOUT_DURATION = 30000;
 
 export const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return res.json().then((err) => Promise.reject(err));
+  return res.json().then((err) => {
+    console.error("API Error:", err);
+    throw new Error(err.message || "An error occurred");
+  });
 };
 
 const fetchWithTimeout = (url, options) => {
