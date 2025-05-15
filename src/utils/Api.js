@@ -13,9 +13,9 @@ export const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
-  return res.json().then((err) => {
-    console.error("API Error:", err);
-    throw new Error(err.message || "An error occurred");
+  return res.text().then((text) => {
+    console.error("Server response:", text);
+    throw new Error(text || "An error occurred");
   });
 };
 
